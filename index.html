@@ -6,12 +6,11 @@
     <meta name="referrer" content="no-referrer"> 
     <title>Blox Fruits Shop | AvgClub</title>
     <style>
-        /* Umumiy Dizayn va Neon Effektlar */
+        /* Umumiy Dizayn */
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0d0d12; background-image: linear-gradient(rgba(13, 13, 18, 0.85), rgba(13, 13, 18, 0.95)), url('https://wallpapercave.com/wp/wp11135759.jpg'); background-size: cover; background-position: center; background-attachment: fixed; color: white; margin: 0; padding: 0; }
         header { background-color: rgba(20, 20, 30, 0.8); padding: 30px 20px; text-align: center; border-bottom: 3px solid #ff4757; box-shadow: 0 0 20px rgba(255, 71, 87, 0.4); backdrop-filter: blur(10px); position: relative;}
         header h1 { margin: 0; color: #ff4757; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 10px #ff4757, 0 0 20px #ff4757; font-size: 28px;}
         
-        /* Til tanlash tugmasi */
         .lang-switcher { position: absolute; top: 20px; right: 20px; }
         .lang-switcher select { background: #2f3542; color: white; border: 2px solid #ff4757; padding: 8px 10px; border-radius: 8px; cursor: pointer; font-weight: bold; outline: none; box-shadow: 0 0 10px rgba(255, 71, 87, 0.3);}
         
@@ -34,24 +33,25 @@
         .card button { width: 100%; background: linear-gradient(45deg, #ff4757, #ff6b81); color: white; border: none; padding: 12px; margin-top: auto; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 15px; text-transform: uppercase; transition: 0.3s; }
         .card button:hover { background: linear-gradient(45deg, #ff6b81, #ff4757); box-shadow: 0 0 15px #ff4757; }
 
-        /* To'lov Oynasi (Modal) */
+        /* To'lov Oynasi */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); padding: 10px; box-sizing: border-box;}
         .modal-content { background: #1e272e; padding: 30px; border-radius: 15px; width: 100%; max-width: 420px; text-align: left; border: 1px solid #ff4757; box-shadow: 0 0 30px rgba(255, 71, 87, 0.2); max-height: 90vh; overflow-y: auto;}
         .modal-content h2 { color: #ff4757; margin-top: 0; text-align: center; text-shadow: 0 0 10px rgba(255,71,87,0.5); font-size: 24px;}
-        .payment-instruction { background-color: #2f3542; padding: 15px; border-radius: 10px; border-left: 4px solid #eccc68; margin-bottom: 20px;}
-        .payment-instruction p { margin: 0 0 10px 0; font-size: 14px; color: #ced6e0; font-weight: bold; }
-        .card-display { background: linear-gradient(135deg, #3742fa, #5352ed); padding: 15px; border-radius: 8px; text-align: center; font-family: 'Courier New', Courier, monospace; font-size: 20px; font-weight: bold; letter-spacing: 2px; color: white; cursor: pointer; transition: 0.3s;}
-        .card-display:hover { transform: scale(1.02); box-shadow: 0 0 15px rgba(55, 66, 250, 0.5);}
-        .input-group { margin-bottom: 15px; }
+        .payment-instruction { background-color: #2f3542; padding: 15px; border-radius: 10px; border-left: 4px solid #3742fa; margin-bottom: 20px; text-align: center;}
+        .payment-instruction p { margin: 0; font-size: 14px; color: #ced6e0; font-weight: bold; }
+        
+        .input-group { margin-bottom: 20px; }
         .input-group label { display: block; margin-bottom: 8px; font-size: 13px; color: #ced6e0; font-weight: bold;}
         .input-group input { width: 100%; padding: 12px; box-sizing: border-box; border-radius: 8px; border: 1px solid #57606f; background: #2f3542; color: white; font-size: 15px;}
-        .pay-btn { width: 100%; background: linear-gradient(45deg, #2ed573, #27ae60); color: white; border: none; padding: 15px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; text-transform: uppercase; transition: 0.3s;}
+        .input-group input:focus { outline: none; border-color: #ff4757; box-shadow: 0 0 8px rgba(255,71,87,0.5);}
+        
+        .pay-btn { width: 100%; background: linear-gradient(45deg, #3742fa, #5352ed); color: white; border: none; padding: 15px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; text-transform: uppercase; transition: 0.3s; box-shadow: 0 0 15px rgba(55, 66, 250, 0.4);}
+        .pay-btn:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(55, 66, 250, 0.7); }
         .close-btn { background: transparent; color: #a4b0be; border: none; cursor: pointer; float: right; font-size: 24px;}
         .success-box { display: none; text-align: center; }
         .order-id { font-size: 22px; color: #eccc68; font-family: 'Courier New', Courier, monospace; letter-spacing: 2px; margin: 15px 0; padding: 15px; background: #2f3542; border: 2px dashed #eccc68; border-radius: 10px; word-break: break-all;}
         .loader { display: none; text-align: center; margin-top: 20px; font-weight: bold; color: #eccc68; font-size: 14px;}
 
-        /* Responsive */
         @media (max-width: 768px) {
             header h1 { font-size: 24px; }
             .lang-switcher { top: 10px; right: 10px; }
@@ -71,7 +71,6 @@
             .card-img-wrapper { height: 80px; }
             .card img { max-width: 65px; max-height: 65px; }
             .card button { padding: 8px; font-size: 11px; }
-            .card-display { font-size: 15px; padding: 10px;}
         }
     </style>
 </head>
@@ -104,51 +103,47 @@
     <div class="modal" id="paymentModal">
         <div class="modal-content" id="paymentForm">
             <button class="close-btn" onclick="closeModal()">✖</button>
-            <h2 id="t-modalTitle">Buyurtma Berish</h2>
+            <h2 id="t-modalTitle">To'lov Sahifasi</h2>
             <p id="selectedItemName" style="text-align: center; font-size: 15px; font-weight: bold; color: #eccc68; margin-bottom: 20px;"></p>
             
             <div class="payment-instruction">
-                <p id="t-modalStep1">1. Belgilangan summani ushbu kartaga o'tkazing:</p>
-                <div class="card-display" onclick="copyCard()">
-                    💳 5614 6846 0556 8557
-                    <span id="t-modalCopy" style="display: block; font-size: 11px; font-family: sans-serif; margin-top: 5px; color: #d2dae2; font-weight: normal;">(Nusxa olish uchun bosing)</span>
-                </div>
+                <p id="t-modalStep1">🔒 Xavfsiz avtomatik to'lov shlyuzi orqali to'lov qilasiz.</p>
             </div>
 
             <div class="input-group">
-                <label id="t-modalStep2">2. Roblox Username (Nikingizni yozing):</label>
+                <label id="t-modalStep2">1. Roblox Username (Nikingizni yozing):</label>
                 <input type="text" id="robloxUser" placeholder="Sizning nikingiz">
             </div>
             
-            <button class="pay-btn" id="t-modalBtn" onclick="processPayment()">Buyurtmani Tasdiqlash</button>
-            <div class="loader" id="loader">Buyurtma rasmiylashtirilmoqda... ⏳</div>
+            <button class="pay-btn" id="t-modalBtn" onclick="processPayment()">To'lovga O'tish 💳</button>
+            <div class="loader" id="loader">To'lov sahifasiga yo'naltirilmoqda... ⏳</div>
         </div>
 
         <div class="modal-content success-box" id="successBox">
-            <h2 id="t-succTitle">✅ Buyurtma Yaratildi!</h2>
-            <p id="t-succDesc1" style="color: #ced6e0; font-size: 14px;">Muvaffaqiyatli! Sizning Order ID raqamingiz:</p>
+            <h2 id="t-succTitle">⏳ To'lov Kutilmoqda...</h2>
+            <p id="t-succDesc1" style="color: #ced6e0; font-size: 14px;">Yangi oynada ochilgan saytda to'lovni amalga oshiring.</p>
             <div class="order-id" id="orderIdDisplay">#ORD-00000</div>
-            <p id="t-succDesc2" style="color: #ff4757; font-weight: bold; font-size: 13px;">Diqqat! Buyurtmani to'liq yakunlash uchun, hoziroq to'lov chekini (skrinshot) va shu Order ID ni Telegram orqali adminga yuboring!</p>
-            <button class="pay-btn" id="t-succBtnTg" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')" style="background: #3742fa;">Adminga Chekni Yuborish ↗</button>
-            <button class="pay-btn" id="t-succBtnClose" style="background:transparent; border: 2px solid #57606f; margin-top:10px;" onclick="closeModal()">Yopish</button>
+            <p id="t-succDesc2" style="color: #2ed573; font-weight: bold; font-size: 13px;">To'lov qilingandan so'ng, pul avtomat ravishda adminga tushadi. Agar muammo bo'lsa adminga yozing!</p>
+            <button class="pay-btn" id="t-succBtnTg" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')" style="background: transparent; border: 2px solid #3742fa; color: white;">Adminga Yozish ↗</button>
+            <button class="pay-btn" id="t-succBtnClose" style="background:#57606f; margin-top:10px;" onclick="closeModal()">Yopish</button>
         </div>
     </div>
 
     <script>
-        // --- LUG'AT (Tarjimalar) ---
+        // LUG'AT
         const i18n = {
             uz: {
                 siteDesc: "O'yin ichidagi eng ishonchli xizmatlar va mevalar xaridi",
                 btnFruits: "Mevalar (Perm/Physical)", btnBoost: "Account Boost", btnAccs: "Account Oldi-Sotdi", btnContact: "Admin Bilan Bog'lanish",
                 titleFruits: "Eng So'nggi Mevalar Ro'yxati", titleBoost: "Account Boost Xizmatlari", titleAccs: "Tayyor Accountlar va Oldi-Sotdi",
                 buyBtn: "Sotib Olish",
-                modalTitle: "Buyurtma Berish", modalSelected: "Tanlandi: ", modalStep1: "1. Belgilangan summani ushbu kartaga o'tkazing:",
-                modalCopy: "(Nusxa olish uchun bosing)", modalStep2: "2. Roblox Username (Nikingizni yozing):",
-                modalInput: "Sizning nikingiz", modalBtn: "Buyurtmani Tasdiqlash", loading: "Buyurtma rasmiylashtirilmoqda... ⏳",
-                succTitle: "✅ Buyurtma Yaratildi!", succDesc1: "Muvaffaqiyatli! Sizning Order ID raqamingiz:",
-                succDesc2: "Diqqat! Buyurtmani to'liq yakunlash uchun, hoziroq to'lov chekini (skrinshot) va shu Order ID ni Telegram orqali adminga yuboring!",
-                succBtnTg: "Adminga Chekni Yuborish ↗", succBtnClose: "Yopish",
-                errInput: "Iltimos, Roblox nikingizni to'g'ri kiriting!", copySuccess: "✅ Nusxa olindi!",
+                modalTitle: "To'lov Sahifasi", modalSelected: "Tanlandi: ", modalStep1: "🔒 Xavfsiz avtomatik to'lov shlyuzi orqali to'lov qilasiz.",
+                modalStep2: "1. Roblox Username (Nikingizni yozing):",
+                modalInput: "Sizning nikingiz", modalBtn: "To'lovga O'tish 💳", loading: "To'lov sahifasiga yo'naltirilmoqda... ⏳",
+                succTitle: "⏳ To'lov Kutilmoqda...", succDesc1: "Yangi oynada ochilgan saytda to'lovni amalga oshiring. Order ID:",
+                succDesc2: "To'lov qilingandan so'ng, pul avtomat ravishda adminga tushadi. Agar muammo bo'lsa adminga yozing!",
+                succBtnTg: "Adminga Yozish ↗", succBtnClose: "Yopish",
+                errInput: "Iltimos, Roblox nikingizni to'g'ri kiriting!",
                 fruitDesc: "O'yin ichidagi eng xaridorgir mevalardan biri.",
                 accSellTitle: "Accountni Sotish", accSellDesc: "Account sotmoqchimisiz? Botimizga video va ma'lumotlarni yuboring.", accSellBtn: "Botga O'tish ↗"
             },
@@ -157,13 +152,13 @@
                 btnFruits: "Фрукты (Perm/Physical)", btnBoost: "Буст Аккаунта", btnAccs: "Покупка/Продажа Акков", btnContact: "Связаться с Админом",
                 titleFruits: "Список Последних Фруктов", titleBoost: "Услуги Буста Аккаунта", titleAccs: "Готовые Аккаунты и Трейд",
                 buyBtn: "Купить",
-                modalTitle: "Оформить Заказ", modalSelected: "Выбрано: ", modalStep1: "1. Переведите указанную сумму на эту карту:",
-                modalCopy: "(Нажмите, чтобы скопировать)", modalStep2: "2. Roblox Username (Ваш ник):",
-                modalInput: "Ваш никнейм", modalBtn: "Подтвердить Заказ", loading: "Оформление заказа... ⏳",
-                succTitle: "✅ Заказ Создан!", succDesc1: "Успешно! Ваш номер заказа (Order ID):",
-                succDesc2: "Внимание! Для завершения заказа отправьте скриншот чека об оплате и этот Order ID админу в Telegram прямо сейчас!",
-                succBtnTg: "Отправить Чек Админу ↗", succBtnClose: "Закрыть",
-                errInput: "Пожалуйста, введите правильный никнейм Roblox!", copySuccess: "✅ Скопировано!",
+                modalTitle: "Оплата", modalSelected: "Выбрано: ", modalStep1: "🔒 Оплата через безопасный автоматический шлюз.",
+                modalStep2: "1. Roblox Username (Ваш ник):",
+                modalInput: "Ваш никнейм", modalBtn: "Перейти к Оплате 💳", loading: "Перенаправление на оплату... ⏳",
+                succTitle: "⏳ Ожидание оплаты...", succDesc1: "Совершите оплату на открывшемся сайте. Order ID:",
+                succDesc2: "После оплаты средства поступят админу автоматически. Если есть проблемы, пишите админу!",
+                succBtnTg: "Написать Админу ↗", succBtnClose: "Закрыть",
+                errInput: "Пожалуйста, введите правильный никнейм Roblox!",
                 fruitDesc: "Один из самых востребованных фруктов в игре.",
                 accSellTitle: "Продать Аккаунт", accSellDesc: "Хотите продать аккаунт? Отправьте видео и данные в наш бот.", accSellBtn: "Перейти в Бот ↗"
             },
@@ -172,22 +167,21 @@
                 btnFruits: "Fruits (Perm/Physical)", btnBoost: "Account Boost", btnAccs: "Account Trade", btnContact: "Contact Admin",
                 titleFruits: "Latest Fruits List", titleBoost: "Account Boost Services", titleAccs: "Ready Accounts & Trading",
                 buyBtn: "Buy Now",
-                modalTitle: "Place Order", modalSelected: "Selected: ", modalStep1: "1. Transfer the specified amount to this card:",
-                modalCopy: "(Click to copy)", modalStep2: "2. Roblox Username (Enter your nick):",
-                modalInput: "Your nickname", modalBtn: "Confirm Order", loading: "Processing order... ⏳",
-                succTitle: "✅ Order Created!", succDesc1: "Success! Your Order ID is:",
-                succDesc2: "Attention! To complete the order, send the payment receipt (screenshot) and this Order ID to the admin via Telegram right now!",
-                succBtnTg: "Send Receipt to Admin ↗", succBtnClose: "Close",
-                errInput: "Please enter your valid Roblox nickname!", copySuccess: "✅ Copied!",
+                modalTitle: "Payment Page", modalSelected: "Selected: ", modalStep1: "🔒 You will pay via a secure automatic gateway.",
+                modalStep2: "1. Roblox Username (Enter your nick):",
+                modalInput: "Your nickname", modalBtn: "Proceed to Payment 💳", loading: "Redirecting to payment page... ⏳",
+                succTitle: "⏳ Awaiting Payment...", succDesc1: "Please complete the payment in the new window. Order ID:",
+                succDesc2: "Once paid, funds will be transferred to the admin automatically. If any issues, contact the admin!",
+                succBtnTg: "Contact Admin ↗", succBtnClose: "Close",
+                errInput: "Please enter your valid Roblox nickname!",
                 fruitDesc: "One of the most demanded fruits in the game.",
                 accSellTitle: "Sell Account", accSellDesc: "Want to sell an account? Send video and details to our bot.", accSellBtn: "Go to Bot ↗"
             }
         };
 
-        let currentLang = 'uz'; // Standart til
-        let currentSection = 'fruits'; // Qaysi bo'lim ochiq
+        let currentLang = 'uz'; 
+        let currentSection = 'fruits'; 
 
-        // BAZALAR
         const fruitsData = [
             { name: "Rocket", bg: "#747d8c", price: "1,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/cb/Rocket_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120039" },
             { name: "Spin", bg: "#747d8c", price: "1,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/88/Spin_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120258" },
@@ -222,13 +216,13 @@
             { name: "Dough", bg: "#eb2f06", price: "28,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/02/Dough_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231210155057" },
             { name: "Shadow", bg: "#eb2f06", price: "22,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/58/Shadow_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241229033053" },
             { name: "Venom", bg: "#eb2f06", price: "25,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d2/Venom_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120425" },
-            { name: "Gas", bg: "#eb2f06", price: "30,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ed/Gas_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241223162315" },
+            { name: "Gas", bg: "#eb2f06", price: "26,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ed/Gas_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241223162315" },
             { name: "Spirit", bg: "#eb2f06", price: "25,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/66/Spirit_Fruit.png/revision/latest/scale-to-width-down/110?cb=20240304190559" },
             { name: "Tiger", bg: "#eb2f06", price: "35,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/14/Tiger_Fruit.png/revision/latest/scale-to-width-down/110?cb=20251101005924" },
-            { name: "Yeti", bg: "#eb2f06", price: "40,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2f/Yeti_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241226020230" },
+            { name: "Yeti", bg: "#eb2f06", price: "30,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2f/Yeti_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241226020230" },
             { name: "Kitsune", bg: "#eb2f06", price: "45,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/65/Kitsune_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241223162956" },
-            { name: "Control", bg: "#eb2f06", price: "40,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/19/Control_Fruit.png/revision/latest/scale-to-width-down/110?cb=20251223165924" },
-            { name: "Dragon", bg: "#eb2f06", price: "100,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/29/Dragon_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241218114129" }
+            { name: "Control", bg: "#eb2f06", price: "22,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/19/Control_Fruit.png/revision/latest/scale-to-width-down/110?cb=20251223165924" },
+            { name: "Dragon", bg: "#eb2f06", price: "50,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/29/Dragon_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241218114129" }
         ];
 
         const boostData = {
@@ -266,12 +260,11 @@
 
         let selectedItem = "";
 
-        // TILNI O'ZGARTIRISH FUNKSIYASI
+        // TILNI O'ZGARTIRISH
         function changeLanguage() {
             currentLang = document.getElementById('langSelect').value;
             const t = i18n[currentLang];
 
-            // Matnlarni almashtirish
             document.getElementById('t-siteDesc').innerText = t.siteDesc;
             document.getElementById('btn-fruits').innerText = t.btnFruits;
             document.getElementById('btn-boost').innerText = t.btnBoost;
@@ -280,7 +273,6 @@
             
             document.getElementById('t-modalTitle').innerText = t.modalTitle;
             document.getElementById('t-modalStep1').innerText = t.modalStep1;
-            document.getElementById('t-modalCopy').innerText = t.modalCopy;
             document.getElementById('t-modalStep2').innerText = t.modalStep2;
             document.getElementById('robloxUser').placeholder = t.modalInput;
             document.getElementById('t-modalBtn').innerText = t.modalBtn;
@@ -292,7 +284,6 @@
             document.getElementById('t-succBtnTg').innerText = t.succBtnTg;
             document.getElementById('t-succBtnClose').innerText = t.succBtnClose;
 
-            // Ochiq bo'limni yangilash
             changeSection(currentSection);
         }
 
@@ -370,20 +361,6 @@
         function closeModal() {
             document.getElementById('paymentModal').style.display = 'none';
             document.getElementById('robloxUser').value = '';
-            document.getElementById('copyText').innerText = i18n[currentLang].modalCopy;
-            document.getElementById('copyText').style.color = "#d2dae2";
-        }
-
-        function copyCard() {
-            navigator.clipboard.writeText("5614 6846 0556 8557").then(() => {
-                const copyTxt = document.getElementById('copyText');
-                copyTxt.innerText = i18n[currentLang].copySuccess;
-                copyTxt.style.color = "#2ed573";
-                setTimeout(() => {
-                    copyTxt.innerText = i18n[currentLang].modalCopy;
-                    copyTxt.style.color = "#d2dae2";
-                }, 2000);
-            });
         }
 
         function processPayment() {
@@ -399,8 +376,17 @@
                 document.getElementById('loader').style.display = 'none';
                 const orderId = "#ORD-" + Math.floor(100000 + Math.random() * 900000);
                 
+                // 1. Telegramga buyurtma haqida ma'lumot jo'natiladi
                 sendToTelegram(orderId, selectedItem, user);
 
+                // ======================================================
+                // 2. DONATELLO SAYTIGA AVTOMATIK YO'NALTIRISH (YANGI OYNA)
+                // DIQQAT: Pastdagi havolani o'zingizning donat linkigizga almashtiring!
+                const donatelloLink = "https://donatello.to/AvgClub_YT"; 
+                window.open(donatelloLink, '_blank');
+                // ======================================================
+
+                // 3. Ekranda tasdiqlash oynasi chiqadi
                 document.getElementById('paymentForm').style.display = 'none';
                 document.getElementById('successBox').style.display = 'block';
                 document.getElementById('orderIdDisplay').innerText = orderId;
@@ -411,7 +397,7 @@
         function sendToTelegram(orderId, item, robloxUser) {
             const botToken = '8689663085:AAEtRKVPpqOMgjhV1L0rdMDArSSkUpnrafU';
             const adminId = '8572227182';
-            const message = `🚨 SAYTDAN YANGI BUYURTMA KELDI!\n\n🧾 Order ID: ${orderId}\n🛍 Xarid: ${item}\n👤 Roblox User: ${robloxUser}\n\n⚠️ Holati: Mijoz buyurtmani rasmiylashtirdi. Hozir botga to'lov chekini tashlashi kerak. Kutib turing!`;
+            const message = `🚨 SAYTDAN YANGI AVTOMATIK BUYURTMA!\n\n🧾 Order ID: ${orderId}\n🛍 Xarid: ${item}\n👤 Roblox User: ${robloxUser}\n\n⚠️ Mijoz hozir Donatello sahifangizga yo'naltirildi. Kuting, donat tushishi kerak!`;
             const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${adminId}&text=${encodeURIComponent(message)}`;
             fetch(url).catch(error => console.error("Xato:", error));
         }
@@ -420,4 +406,3 @@
     </script>
 </body>
 </html>
-
