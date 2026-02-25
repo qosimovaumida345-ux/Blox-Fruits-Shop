@@ -28,124 +28,46 @@
             backdrop-filter: blur(10px);
         }
         
-        header h1 { 
-            margin: 0; 
-            color: #ff4757; 
-            text-transform: uppercase; 
-            letter-spacing: 3px; 
-            text-shadow: 0 0 10px #ff4757, 0 0 20px #ff4757;
-        }
+        header h1 { margin: 0; color: #ff4757; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 10px #ff4757, 0 0 20px #ff4757; }
 
-        nav { 
-            display: flex; 
-            justify-content: center; 
-            gap: 15px; 
-            background-color: rgba(30, 39, 46, 0.9); 
-            padding: 15px; 
-            flex-wrap: wrap; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-
-        nav button { 
-            background-color: transparent; 
-            color: #d2dae2; 
-            border: 2px solid #57606f; 
-            padding: 10px 20px; 
-            cursor: pointer; 
-            border-radius: 8px; 
-            font-weight: bold; 
-            font-size: 14px;
-            text-transform: uppercase;
-            transition: all 0.3s ease; 
-        }
-
-        nav button:hover { 
-            background-color: #ff4757; 
-            border-color: #ff4757; 
-            color: white;
-            box-shadow: 0 0 15px #ff4757;
-        }
+        nav { display: flex; justify-content: center; gap: 15px; background-color: rgba(30, 39, 46, 0.9); padding: 15px; flex-wrap: wrap; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        nav button { background-color: transparent; color: #d2dae2; border: 2px solid #57606f; padding: 10px 20px; cursor: pointer; border-radius: 8px; font-weight: bold; font-size: 14px; text-transform: uppercase; transition: all 0.3s ease; }
+        nav button:hover { background-color: #ff4757; border-color: #ff4757; color: white; box-shadow: 0 0 15px #ff4757; }
         
         /* Mevalar KARTALARI bo'limi */
         .container { padding: 40px 20px; max-width: 1250px; margin: 0 auto; text-align: center; }
         .container h2 { text-shadow: 0 0 10px rgba(255,255,255,0.3); font-size: 28px; margin-bottom: 30px;}
-        
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
         
-        .card { 
-            background-color: rgba(30, 39, 46, 0.85); 
-            border: 2px solid #3d3d3d; 
-            border-radius: 15px; 
-            padding: 20px; 
-            transition: all 0.3s ease; 
-            backdrop-filter: blur(5px);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card:hover { 
-            transform: translateY(-5px); 
-            border-color: #ff4757; 
-            box-shadow: 0 10px 25px rgba(255, 71, 87, 0.3); 
-        }
+        .card { background-color: rgba(30, 39, 46, 0.85); border: 2px solid #3d3d3d; border-radius: 15px; padding: 20px; transition: all 0.3s ease; backdrop-filter: blur(5px); position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-5px); border-color: #ff4757; box-shadow: 0 10px 25px rgba(255, 71, 87, 0.3); }
 
-        .card-img-wrapper {
-            height: 120px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
-        }
-
-        .card img {
-            max-width: 100px;
-            max-height: 100px;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
-            transition: 0.3s;
-        }
-        
-        .card:hover img {
-            transform: scale(1.1);
-        }
+        .card-img-wrapper { height: 120px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; box-shadow: inset 0 0 20px rgba(0,0,0,0.5); }
+        .card img { max-width: 100px; max-height: 100px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5)); transition: 0.3s; }
+        .card:hover img { transform: scale(1.1); }
 
         .card h3 { margin: 10px 0; font-size: 22px; text-transform: uppercase; letter-spacing: 1px;}
         .card .price { color: #2ed573; font-weight: bold; font-size: 18px; text-shadow: 0 0 10px rgba(46, 213, 115, 0.5);}
         
-        .card button { 
-            width: 100%; 
-            background: linear-gradient(45deg, #ff4757, #ff6b81); 
-            color: white; 
-            border: none; 
-            padding: 12px; 
-            margin-top: 15px; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            font-size: 15px;
-            text-transform: uppercase;
-            transition: 0.3s; 
-        }
-        
-        .card button:hover { 
-            background: linear-gradient(45deg, #ff6b81, #ff4757);
-            box-shadow: 0 0 15px #ff4757;
-        }
+        .card button { width: 100%; background: linear-gradient(45deg, #ff4757, #ff6b81); color: white; border: none; padding: 12px; margin-top: 15px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 15px; text-transform: uppercase; transition: 0.3s; }
+        .card button:hover { background: linear-gradient(45deg, #ff6b81, #ff4757); box-shadow: 0 0 15px #ff4757; }
 
         /* To'lov Oynasi (Modal) */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); padding: 10px; box-sizing: border-box;}
         .modal-content { background: #1e272e; padding: 30px; border-radius: 15px; width: 100%; max-width: 420px; text-align: left; border: 1px solid #ff4757; box-shadow: 0 0 30px rgba(255, 71, 87, 0.2); max-height: 90vh; overflow-y: auto;}
         .modal-content h2 { color: #ff4757; margin-top: 0; text-align: center; text-shadow: 0 0 10px rgba(255,71,87,0.5); font-size: 24px;}
         
+        /* Yangi Karta Dizayni */
+        .payment-instruction { background-color: #2f3542; padding: 15px; border-radius: 10px; border-left: 4px solid #eccc68; margin-bottom: 20px;}
+        .payment-instruction p { margin: 0 0 10px 0; font-size: 14px; color: #ced6e0; font-weight: bold; }
+        .card-display { background: linear-gradient(135deg, #3742fa, #5352ed); padding: 15px; border-radius: 8px; text-align: center; font-family: 'Courier New', Courier, monospace; font-size: 20px; font-weight: bold; letter-spacing: 2px; color: white; cursor: pointer; transition: 0.3s; position: relative;}
+        .card-display:hover { transform: scale(1.02); box-shadow: 0 0 15px rgba(55, 66, 250, 0.5);}
+        .card-display:active { transform: scale(0.98); }
+
         .input-group { margin-bottom: 15px; }
         .input-group label { display: block; margin-bottom: 8px; font-size: 13px; color: #ced6e0; font-weight: bold;}
         .input-group input { width: 100%; padding: 12px; box-sizing: border-box; border-radius: 8px; border: 1px solid #57606f; background: #2f3542; color: white; font-size: 15px;}
         .input-group input:focus { outline: none; border-color: #ff4757; box-shadow: 0 0 8px rgba(255,71,87,0.5);}
-        
-        .split-inputs { display: flex; gap: 15px; }
-        .split-inputs .input-group:first-child { flex: 1; }
-        .split-inputs .input-group:last-child { flex: 2; }
 
         .pay-btn { width: 100%; background: linear-gradient(45deg, #2ed573, #27ae60); color: white; border: none; padding: 15px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; text-transform: uppercase; transition: 0.3s;}
         .pay-btn:hover { box-shadow: 0 0 20px rgba(46, 213, 115, 0.6); }
@@ -153,13 +75,11 @@
         .close-btn:hover { color: #ff4757; }
 
         .success-box { display: none; text-align: center; }
-        .order-id { font-size: 22px; color: #eccc68; font-family: 'Courier New', Courier, monospace; letter-spacing: 2px; margin: 20px 0; padding: 15px; background: #2f3542; border: 2px dashed #eccc68; border-radius: 10px; word-break: break-all;}
+        .order-id { font-size: 22px; color: #eccc68; font-family: 'Courier New', Courier, monospace; letter-spacing: 2px; margin: 15px 0; padding: 15px; background: #2f3542; border: 2px dashed #eccc68; border-radius: 10px; word-break: break-all;}
         
         .loader { display: none; text-align: center; margin-top: 20px; font-weight: bold; color: #eccc68; font-size: 14px;}
 
-        /* =========================================
-           RESPONSIVE DIZAYN (Planshetlar uchun) 
-           ========================================= */
+        /* RESPONSIVE DIZAYN */
         @media (max-width: 768px) {
             header h1 { font-size: 24px; letter-spacing: 2px; }
             nav button { padding: 10px 15px; font-size: 13px; width: 45%; text-align: center; }
@@ -170,38 +90,24 @@
             .card img { max-width: 80px; max-height: 80px; }
         }
 
-        /* =========================================
-           RESPONSIVE DIZAYN (Telefonlar uchun) 
-           ========================================= */
         @media (max-width: 500px) {
             header { padding: 20px 10px; }
             header h1 { font-size: 20px; letter-spacing: 1px; }
-            header p { font-size: 12px; }
-            
             nav { flex-direction: column; gap: 10px; padding: 10px; }
             nav button { width: 100%; padding: 12px; font-size: 14px; }
-            
-            .container { padding: 20px 10px; }
             .container h2 { font-size: 22px; margin-bottom: 20px; }
-            
-            /* Telefonda mevalar 2 qator yonma-yon bo'ladi */
             .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            
             .card { padding: 10px; border-radius: 10px; }
             .card h3 { font-size: 14px; margin: 8px 0; }
             .card .price { font-size: 14px; }
             .card-img-wrapper { height: 80px; margin-bottom: 10px; border-radius: 8px; }
             .card img { max-width: 65px; max-height: 65px; }
             .card button { padding: 8px; font-size: 12px; margin-top: 10px; }
-
-            /* To'lov Oynasi Telefonda */
             .modal-content { padding: 20px; border-radius: 10px; }
             .modal-content h2 { font-size: 20px; }
-            .split-inputs { flex-direction: column; gap: 0; }
-            .split-inputs .input-group:first-child { margin-bottom: 15px; }
+            .card-display { font-size: 16px; padding: 12px;}
             .input-group input { padding: 10px; font-size: 14px; }
             .pay-btn { padding: 12px; font-size: 14px; }
-            .order-id { font-size: 18px; padding: 10px; }
         }
     </style>
 </head>
@@ -228,47 +134,37 @@
     <div class="modal" id="paymentModal">
         <div class="modal-content" id="paymentForm">
             <button class="close-btn" onclick="closeModal()">✖</button>
-            <h2>To'lov Qilish</h2>
+            <h2>Buyurtma Berish</h2>
             <p id="selectedItemName" style="text-align: center; font-size: 16px; font-weight: bold; color: #eccc68; margin-bottom: 20px;"></p>
             
-            <div class="input-group">
-                <label>Karta Raqami (Uzcard/Humo)</label>
-                <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19">
-            </div>
-            
-            <div class="split-inputs">
-                <div class="input-group">
-                    <label>Muddat</label>
-                    <input type="text" id="expiry" placeholder="MM/YY" maxlength="5">
-                </div>
-                <div class="input-group">
-                    <label>Ism va Familiya</label>
-                    <input type="text" id="cardName" placeholder="JOHN DOE">
+            <div class="payment-instruction">
+                <p>1. Belgilangan summani ushbu kartaga o'tkazing:</p>
+                <div class="card-display" onclick="copyCard()">
+                    💳 5614 6846 0556 8557
+                    <span id="copyText" style="display: block; font-size: 11px; font-family: sans-serif; margin-top: 5px; color: #d2dae2; font-weight: normal;">(Nusxa olish uchun bosing)</span>
                 </div>
             </div>
 
             <div class="input-group">
-                <label>Roblox Username</label>
+                <label>2. Roblox Username (Nikingizni yozing):</label>
                 <input type="text" id="robloxUser" placeholder="Sizning nikingiz">
             </div>
             
-            <button class="pay-btn" onclick="processPayment()">To'lovni Tasdiqlash</button>
-            <div class="loader" id="loader">Karta ma'lumotlari tekshirilmoqda... ⏳</div>
+            <button class="pay-btn" onclick="processPayment()">Buyurtmani Tasdiqlash</button>
+            <div class="loader" id="loader">Buyurtma rasmiylashtirilmoqda... ⏳</div>
         </div>
 
         <div class="modal-content success-box" id="successBox">
-            <h2>✅ To'lov Qabul Qilindi!</h2>
-            <p style="color: #ced6e0; font-size: 14px;">Sizning buyurtmangiz muvaffaqiyatli rasmiylashtirildi.</p>
-            <p style="margin-top: 15px; font-size: 14px;">Maxsus Order ID raqamingiz:</p>
+            <h2>✅ Buyurtma Yaratildi!</h2>
+            <p style="color: #ced6e0; font-size: 14px;">Muvaffaqiyatli! Sizning Order ID raqamingiz:</p>
             <div class="order-id" id="orderIdDisplay">#ORD-00000</div>
-            <p style="color: #ff4757; font-weight: bold; font-size: 13px;">Diqqat! Shu raqamdan nusxa oling va darhol Telegram orqali adminga yuboring!</p>
-            <button class="pay-btn" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')" style="background: #3742fa;">Adminga Yozish ↗</button>
+            <p style="color: #ff4757; font-weight: bold; font-size: 13px;">Diqqat! Buyurtmani to'liq yakunlash uchun, hoziroq to'lov chekini (skrinshot) va shu Order ID ni Telegram orqali adminga yuboring!</p>
+            <button class="pay-btn" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')" style="background: #3742fa;">Adminga Chekni Yuborish ↗</button>
             <button class="pay-btn" style="background:transparent; border: 2px solid #57606f; margin-top:10px;" onclick="closeModal()">Yopish</button>
         </div>
     </div>
 
     <script>
-        // Meva ma'lumotlari
         const fruitsData = [
             { name: "Rocket", bg: "#747d8c", price: "1,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/cb/Rocket_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120039" },
             { name: "Spin", bg: "#747d8c", price: "1,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/88/Spin_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120258" },
@@ -315,17 +211,7 @@
 
         let selectedItem = "";
 
-        // Karta raqamini avtomat probel bn ajratish
-        document.getElementById('cardNumber').addEventListener('input', function (e) {
-            e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{4})/g, '$1 ').trim();
-        });
-
-        // Muddatni avtomat / bilan ajratish
-        document.getElementById('expiry').addEventListener('input', function (e) {
-            e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{2})/, '$1/').trim();
-        });
-
-        // Mevalarni ekranga chiqarish
+        // Ekranga mevalarni yuklash
         function renderFruits() {
             const grid = document.getElementById('fruit-grid');
             fruitsData.forEach(fruit => {
@@ -353,20 +239,30 @@
 
         function closeModal() {
             document.getElementById('paymentModal').style.display = 'none';
-            document.getElementById('cardNumber').value = '';
-            document.getElementById('expiry').value = '';
-            document.getElementById('cardName').value = '';
             document.getElementById('robloxUser').value = '';
+            document.getElementById('copyText').innerText = "(Nusxa olish uchun bosing)";
+            document.getElementById('copyText').style.color = "#d2dae2";
         }
 
+        // Karta raqamini bittada nusxalash
+        function copyCard() {
+            navigator.clipboard.writeText("5614 6846 0556 8557").then(() => {
+                const copyTxt = document.getElementById('copyText');
+                copyTxt.innerText = "✅ Nusxa olindi!";
+                copyTxt.style.color = "#2ed573";
+                setTimeout(() => {
+                    copyTxt.innerText = "(Nusxa olish uchun bosing)";
+                    copyTxt.style.color = "#d2dae2";
+                }, 2000);
+            });
+        }
+
+        // Buyurtmani tasdiqlash
         function processPayment() {
-            const card = document.getElementById('cardNumber').value.replace(/\s/g, '');
-            const expiry = document.getElementById('expiry').value;
-            const name = document.getElementById('cardName').value;
             const user = document.getElementById('robloxUser').value;
 
-            if(card.length < 16 || expiry.length < 5 || name.length < 3 || user.length < 3) {
-                alert("Iltimos, barcha maydonlarni to'g'ri va to'liq to'ldiring!");
+            if(user.length < 3) {
+                alert("Iltimos, Roblox nikingizni to'g'ri kiriting!");
                 return;
             }
 
@@ -383,14 +279,16 @@
                 document.getElementById('successBox').style.display = 'block';
                 document.getElementById('orderIdDisplay').innerText = orderId;
                 
-            }, 3000); 
+            }, 1500); 
         }
 
+        // Telegram botga SMS borishi
         function sendToTelegram(orderId, item, robloxUser) {
             const botToken = '8689663085:AAEtRKVPpqOMgjhV1L0rdMDArSSkUpnrafU';
             const adminId = '8572227182';
             
-            const message = `🚨 SAYTDAN YANGI BUYURTMA!\n\n🧾 Order ID: ${orderId}\n🛍 Mahsulot: ${item}\n👤 Roblox User: ${robloxUser}\n💳 To'lov: Qabul qilindi (Karta orqali).`;
+            // Xabar matni endi "Skrinshot kutilmoqda" shaklida
+            const message = `🚨 SAYTDAN YANGI BUYURTMA KELDI!\n\n🧾 Order ID: ${orderId}\n🛍 Mahsulot: ${item}\n👤 Roblox User: ${robloxUser}\n\n⚠️ Holati: Mijoz buyurtmani rasmiylashtirdi. Hozir botga to'lov chekini tashlashi kerak. Kutib turing!`;
             
             const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${adminId}&text=${encodeURIComponent(message)}`;
             
