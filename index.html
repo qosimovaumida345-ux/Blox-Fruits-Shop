@@ -21,7 +21,7 @@
 
         header { 
             background-color: rgba(20, 20, 30, 0.8); 
-            padding: 30px; 
+            padding: 30px 20px; 
             text-align: center; 
             border-bottom: 3px solid #ff4757; 
             box-shadow: 0 0 20px rgba(255, 71, 87, 0.4);
@@ -39,7 +39,7 @@
         nav { 
             display: flex; 
             justify-content: center; 
-            gap: 20px; 
+            gap: 15px; 
             background-color: rgba(30, 39, 46, 0.9); 
             padding: 15px; 
             flex-wrap: wrap; 
@@ -50,11 +50,11 @@
             background-color: transparent; 
             color: #d2dae2; 
             border: 2px solid #57606f; 
-            padding: 10px 25px; 
+            padding: 10px 20px; 
             cursor: pointer; 
             border-radius: 8px; 
             font-weight: bold; 
-            font-size: 15px;
+            font-size: 14px;
             text-transform: uppercase;
             transition: all 0.3s ease; 
         }
@@ -84,9 +84,9 @@
         }
         
         .card:hover { 
-            transform: translateY(-10px); 
+            transform: translateY(-5px); 
             border-color: #ff4757; 
-            box-shadow: 0 15px 30px rgba(255, 71, 87, 0.3); 
+            box-shadow: 0 10px 25px rgba(255, 71, 87, 0.3); 
         }
 
         .card-img-wrapper {
@@ -100,18 +100,18 @@
         }
 
         .card img {
-            max-width: 110px;
-            max-height: 110px;
+            max-width: 100px;
+            max-height: 100px;
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
             transition: 0.3s;
         }
         
         .card:hover img {
-            transform: scale(1.15);
+            transform: scale(1.1);
         }
 
-        .card h3 { margin: 10px 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px;}
-        .card .price { color: #2ed573; font-weight: bold; font-size: 20px; text-shadow: 0 0 10px rgba(46, 213, 115, 0.5);}
+        .card h3 { margin: 10px 0; font-size: 22px; text-transform: uppercase; letter-spacing: 1px;}
+        .card .price { color: #2ed573; font-weight: bold; font-size: 18px; text-shadow: 0 0 10px rgba(46, 213, 115, 0.5);}
         
         .card button { 
             width: 100%; 
@@ -123,7 +123,7 @@
             border-radius: 8px; 
             cursor: pointer; 
             font-weight: bold; 
-            font-size: 16px;
+            font-size: 15px;
             text-transform: uppercase;
             transition: 0.3s; 
         }
@@ -134,32 +134,82 @@
         }
 
         /* To'lov Oynasi (Modal) */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px);}
-        .modal-content { background: #1e272e; padding: 35px; border-radius: 15px; width: 90%; max-width: 420px; text-align: left; border: 1px solid #ff4757; box-shadow: 0 0 30px rgba(255, 71, 87, 0.2);}
-        .modal-content h2 { color: #ff4757; margin-top: 0; text-align: center; text-shadow: 0 0 10px rgba(255,71,87,0.5);}
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); padding: 10px; box-sizing: border-box;}
+        .modal-content { background: #1e272e; padding: 30px; border-radius: 15px; width: 100%; max-width: 420px; text-align: left; border: 1px solid #ff4757; box-shadow: 0 0 30px rgba(255, 71, 87, 0.2); max-height: 90vh; overflow-y: auto;}
+        .modal-content h2 { color: #ff4757; margin-top: 0; text-align: center; text-shadow: 0 0 10px rgba(255,71,87,0.5); font-size: 24px;}
         
-        .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; margin-bottom: 8px; font-size: 14px; color: #ced6e0; font-weight: bold;}
-        .input-group input { width: 100%; padding: 12px; box-sizing: border-box; border-radius: 8px; border: 1px solid #57606f; background: #2f3542; color: white; font-size: 16px;}
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 13px; color: #ced6e0; font-weight: bold;}
+        .input-group input { width: 100%; padding: 12px; box-sizing: border-box; border-radius: 8px; border: 1px solid #57606f; background: #2f3542; color: white; font-size: 15px;}
         .input-group input:focus { outline: none; border-color: #ff4757; box-shadow: 0 0 8px rgba(255,71,87,0.5);}
         
-        .pay-btn { width: 100%; background: linear-gradient(45deg, #2ed573, #27ae60); color: white; border: none; padding: 15px; font-size: 18px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; text-transform: uppercase; transition: 0.3s;}
+        .split-inputs { display: flex; gap: 15px; }
+        .split-inputs .input-group:first-child { flex: 1; }
+        .split-inputs .input-group:last-child { flex: 2; }
+
+        .pay-btn { width: 100%; background: linear-gradient(45deg, #2ed573, #27ae60); color: white; border: none; padding: 15px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; text-transform: uppercase; transition: 0.3s;}
         .pay-btn:hover { box-shadow: 0 0 20px rgba(46, 213, 115, 0.6); }
-        .close-btn { background: transparent; color: #a4b0be; border: none; cursor: pointer; float: right; font-size: 24px; transition: 0.2s;}
+        .close-btn { background: transparent; color: #a4b0be; border: none; cursor: pointer; float: right; font-size: 24px; transition: 0.2s; padding: 0;}
         .close-btn:hover { color: #ff4757; }
 
-        /* Success Oynasi */
         .success-box { display: none; text-align: center; }
-        .order-id { font-size: 26px; color: #eccc68; font-family: 'Courier New', Courier, monospace; letter-spacing: 3px; margin: 20px 0; padding: 15px; background: #2f3542; border: 2px dashed #eccc68; border-radius: 10px;}
+        .order-id { font-size: 22px; color: #eccc68; font-family: 'Courier New', Courier, monospace; letter-spacing: 2px; margin: 20px 0; padding: 15px; background: #2f3542; border: 2px dashed #eccc68; border-radius: 10px; word-break: break-all;}
         
-        .loader { display: none; text-align: center; margin-top: 20px; font-weight: bold; color: #eccc68;}
+        .loader { display: none; text-align: center; margin-top: 20px; font-weight: bold; color: #eccc68; font-size: 14px;}
+
+        /* =========================================
+           RESPONSIVE DIZAYN (Planshetlar uchun) 
+           ========================================= */
+        @media (max-width: 768px) {
+            header h1 { font-size: 24px; letter-spacing: 2px; }
+            nav button { padding: 10px 15px; font-size: 13px; width: 45%; text-align: center; }
+            .grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+            .card { padding: 15px; }
+            .card h3 { font-size: 18px; }
+            .card-img-wrapper { height: 100px; }
+            .card img { max-width: 80px; max-height: 80px; }
+        }
+
+        /* =========================================
+           RESPONSIVE DIZAYN (Telefonlar uchun) 
+           ========================================= */
+        @media (max-width: 500px) {
+            header { padding: 20px 10px; }
+            header h1 { font-size: 20px; letter-spacing: 1px; }
+            header p { font-size: 12px; }
+            
+            nav { flex-direction: column; gap: 10px; padding: 10px; }
+            nav button { width: 100%; padding: 12px; font-size: 14px; }
+            
+            .container { padding: 20px 10px; }
+            .container h2 { font-size: 22px; margin-bottom: 20px; }
+            
+            /* Telefonda mevalar 2 qator yonma-yon bo'ladi */
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            
+            .card { padding: 10px; border-radius: 10px; }
+            .card h3 { font-size: 14px; margin: 8px 0; }
+            .card .price { font-size: 14px; }
+            .card-img-wrapper { height: 80px; margin-bottom: 10px; border-radius: 8px; }
+            .card img { max-width: 65px; max-height: 65px; }
+            .card button { padding: 8px; font-size: 12px; margin-top: 10px; }
+
+            /* To'lov Oynasi Telefonda */
+            .modal-content { padding: 20px; border-radius: 10px; }
+            .modal-content h2 { font-size: 20px; }
+            .split-inputs { flex-direction: column; gap: 0; }
+            .split-inputs .input-group:first-child { margin-bottom: 15px; }
+            .input-group input { padding: 10px; font-size: 14px; }
+            .pay-btn { padding: 12px; font-size: 14px; }
+            .order-id { font-size: 18px; padding: 10px; }
+        }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Blox Fruits Shop | By AvgClub</h1>
-        <p style="color: #a4b0be;">O'yin ichidagi eng ishonchli xizmatlar va mevalar xaridi</p>
+        <p style="color: #a4b0be; margin-top: 10px;">O'yin ichidagi eng ishonchli xizmatlar va mevalar xaridi</p>
     </header>
 
     <nav>
@@ -179,22 +229,24 @@
         <div class="modal-content" id="paymentForm">
             <button class="close-btn" onclick="closeModal()">✖</button>
             <h2>To'lov Qilish</h2>
-            <p id="selectedItemName" style="text-align: center; font-size: 18px; font-weight: bold; color: #eccc68; margin-bottom: 25px;"></p>
+            <p id="selectedItemName" style="text-align: center; font-size: 16px; font-weight: bold; color: #eccc68; margin-bottom: 20px;"></p>
             
             <div class="input-group">
                 <label>Karta Raqami (Uzcard/Humo)</label>
                 <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19">
             </div>
-            <div style="display: flex; gap: 15px;">
-                <div class="input-group" style="flex: 1;">
+            
+            <div class="split-inputs">
+                <div class="input-group">
                     <label>Muddat</label>
                     <input type="text" id="expiry" placeholder="MM/YY" maxlength="5">
                 </div>
-                <div class="input-group" style="flex: 2;">
+                <div class="input-group">
                     <label>Ism va Familiya</label>
                     <input type="text" id="cardName" placeholder="JOHN DOE">
                 </div>
             </div>
+
             <div class="input-group">
                 <label>Roblox Username</label>
                 <input type="text" id="robloxUser" placeholder="Sizning nikingiz">
@@ -206,12 +258,12 @@
 
         <div class="modal-content success-box" id="successBox">
             <h2>✅ To'lov Qabul Qilindi!</h2>
-            <p style="color: #ced6e0;">Sizning buyurtmangiz muvaffaqiyatli rasmiylashtirildi.</p>
-            <p style="margin-top: 20px;">Sizning maxsus Order ID raqamingiz:</p>
+            <p style="color: #ced6e0; font-size: 14px;">Sizning buyurtmangiz muvaffaqiyatli rasmiylashtirildi.</p>
+            <p style="margin-top: 15px; font-size: 14px;">Maxsus Order ID raqamingiz:</p>
             <div class="order-id" id="orderIdDisplay">#ORD-00000</div>
-            <p style="color: #ff4757; font-weight: bold;">Diqqat! Shu raqamdan nusxa oling va darhol Telegram orqali adminga yuboring!</p>
+            <p style="color: #ff4757; font-weight: bold; font-size: 13px;">Diqqat! Shu raqamdan nusxa oling va darhol Telegram orqali adminga yuboring!</p>
             <button class="pay-btn" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')" style="background: #3742fa;">Adminga Yozish ↗</button>
-            <button class="pay-btn" style="background:transparent; border: 2px solid #57606f; margin-top:15px;" onclick="closeModal()">Yopish</button>
+            <button class="pay-btn" style="background:transparent; border: 2px solid #57606f; margin-top:10px;" onclick="closeModal()">Yopish</button>
         </div>
     </div>
 
@@ -273,7 +325,7 @@
             e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{2})/, '$1/').trim();
         });
 
-        // Mevalarni ekranga chiqarish (Rasmlar bilan)
+        // Mevalarni ekranga chiqarish
         function renderFruits() {
             const grid = document.getElementById('fruit-grid');
             fruitsData.forEach(fruit => {
@@ -291,7 +343,6 @@
             });
         }
 
-        // Modal funksiyalari
         function openModal(itemName) {
             selectedItem = itemName;
             document.getElementById('selectedItemName').innerText = "Tanlandi: " + itemName;
@@ -308,7 +359,6 @@
             document.getElementById('robloxUser').value = '';
         }
 
-        // To'lov jarayoni va Telegramga xabar yuborish
         function processPayment() {
             const card = document.getElementById('cardNumber').value.replace(/\s/g, '');
             const expiry = document.getElementById('expiry').value;
@@ -322,13 +372,11 @@
 
             document.getElementById('loader').style.display = 'block';
             
-            // Simulyatsiya (Kutish effekti)
             setTimeout(() => {
                 document.getElementById('loader').style.display = 'none';
                 
                 const orderId = "#ORD-" + Math.floor(100000 + Math.random() * 900000);
                 
-                // Telegramga SMS yuborish funksiyasi
                 sendToTelegram(orderId, selectedItem, user);
 
                 document.getElementById('paymentForm').style.display = 'none';
@@ -339,7 +387,6 @@
         }
 
         function sendToTelegram(orderId, item, robloxUser) {
-            // Sizning botingiz tokalari va ID
             const botToken = '8689663085:AAEtRKVPpqOMgjhV1L0rdMDArSSkUpnrafU';
             const adminId = '8572227182';
             
