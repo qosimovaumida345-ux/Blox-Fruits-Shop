@@ -7,49 +7,30 @@
     <title>Blox Fruits Shop | AvgClub</title>
     <style>
         /* Umumiy Dizayn va Neon Effektlar */
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #0d0d12; 
-            background-image: linear-gradient(rgba(13, 13, 18, 0.85), rgba(13, 13, 18, 0.95)), url('https://wallpapercave.com/wp/wp11135759.jpg'); 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white; 
-            margin: 0; 
-            padding: 0; 
-        }
-
-        header { 
-            background-color: rgba(20, 20, 30, 0.8); 
-            padding: 30px 20px; 
-            text-align: center; 
-            border-bottom: 3px solid #ff4757; 
-            box-shadow: 0 0 20px rgba(255, 71, 87, 0.4);
-            backdrop-filter: blur(10px);
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0d0d12; background-image: linear-gradient(rgba(13, 13, 18, 0.85), rgba(13, 13, 18, 0.95)), url('https://wallpapercave.com/wp/wp11135759.jpg'); background-size: cover; background-position: center; background-attachment: fixed; color: white; margin: 0; padding: 0; }
+        header { background-color: rgba(20, 20, 30, 0.8); padding: 30px 20px; text-align: center; border-bottom: 3px solid #ff4757; box-shadow: 0 0 20px rgba(255, 71, 87, 0.4); backdrop-filter: blur(10px); position: relative;}
+        header h1 { margin: 0; color: #ff4757; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 10px #ff4757, 0 0 20px #ff4757; font-size: 28px;}
         
-        header h1 { margin: 0; color: #ff4757; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 10px #ff4757, 0 0 20px #ff4757; }
-
+        /* Til tanlash tugmasi */
+        .lang-switcher { position: absolute; top: 20px; right: 20px; }
+        .lang-switcher select { background: #2f3542; color: white; border: 2px solid #ff4757; padding: 8px 10px; border-radius: 8px; cursor: pointer; font-weight: bold; outline: none; box-shadow: 0 0 10px rgba(255, 71, 87, 0.3);}
+        
         nav { display: flex; justify-content: center; gap: 15px; background-color: rgba(30, 39, 46, 0.9); padding: 15px; flex-wrap: wrap; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
         nav button { background-color: transparent; color: #d2dae2; border: 2px solid #57606f; padding: 10px 20px; cursor: pointer; border-radius: 8px; font-weight: bold; font-size: 14px; text-transform: uppercase; transition: all 0.3s ease; }
         nav button:hover, nav button.active { background-color: #ff4757; border-color: #ff4757; color: white; box-shadow: 0 0 15px #ff4757; }
         
-        /* Kartalar bo'limi */
         .container { padding: 40px 20px; max-width: 1250px; margin: 0 auto; text-align: center; }
         .container h2 { text-shadow: 0 0 10px rgba(255,255,255,0.3); font-size: 28px; margin-bottom: 30px; color: #eccc68;}
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
         
-        .card { background-color: rgba(30, 39, 46, 0.85); border: 2px solid #3d3d3d; border-radius: 15px; padding: 20px; transition: all 0.3s ease; backdrop-filter: blur(5px); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;}
+        .card { background-color: rgba(30, 39, 46, 0.85); border: 2px solid #3d3d3d; border-radius: 15px; padding: 20px; transition: all 0.3s ease; backdrop-filter: blur(5px); display: flex; flex-direction: column; justify-content: space-between;}
         .card:hover { transform: translateY(-5px); border-color: #ff4757; box-shadow: 0 10px 25px rgba(255, 71, 87, 0.3); }
-
         .card-img-wrapper { height: 120px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; box-shadow: inset 0 0 20px rgba(0,0,0,0.5); }
         .card img { max-width: 100px; max-height: 100px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5)); transition: 0.3s; }
         .card:hover img { transform: scale(1.1); }
-
         .card h3 { margin: 10px 0 5px 0; font-size: 20px; text-transform: uppercase; letter-spacing: 1px;}
         .card p.desc { font-size: 12px; color: #ced6e0; margin-bottom: 15px; height: 35px; overflow: hidden;}
         .card .price { color: #2ed573; font-weight: bold; font-size: 18px; text-shadow: 0 0 10px rgba(46, 213, 115, 0.5); margin: 5px 0;}
-        
         .card button { width: 100%; background: linear-gradient(45deg, #ff4757, #ff6b81); color: white; border: none; padding: 12px; margin-top: auto; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 15px; text-transform: uppercase; transition: 0.3s; }
         .card button:hover { background: linear-gradient(45deg, #ff6b81, #ff4757); box-shadow: 0 0 15px #ff4757; }
 
@@ -57,105 +38,156 @@
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); padding: 10px; box-sizing: border-box;}
         .modal-content { background: #1e272e; padding: 30px; border-radius: 15px; width: 100%; max-width: 420px; text-align: left; border: 1px solid #ff4757; box-shadow: 0 0 30px rgba(255, 71, 87, 0.2); max-height: 90vh; overflow-y: auto;}
         .modal-content h2 { color: #ff4757; margin-top: 0; text-align: center; text-shadow: 0 0 10px rgba(255,71,87,0.5); font-size: 24px;}
-        
         .payment-instruction { background-color: #2f3542; padding: 15px; border-radius: 10px; border-left: 4px solid #eccc68; margin-bottom: 20px;}
         .payment-instruction p { margin: 0 0 10px 0; font-size: 14px; color: #ced6e0; font-weight: bold; }
-        .card-display { background: linear-gradient(135deg, #3742fa, #5352ed); padding: 15px; border-radius: 8px; text-align: center; font-family: 'Courier New', Courier, monospace; font-size: 20px; font-weight: bold; letter-spacing: 2px; color: white; cursor: pointer; transition: 0.3s; position: relative;}
+        .card-display { background: linear-gradient(135deg, #3742fa, #5352ed); padding: 15px; border-radius: 8px; text-align: center; font-family: 'Courier New', Courier, monospace; font-size: 20px; font-weight: bold; letter-spacing: 2px; color: white; cursor: pointer; transition: 0.3s;}
         .card-display:hover { transform: scale(1.02); box-shadow: 0 0 15px rgba(55, 66, 250, 0.5);}
-        .card-display:active { transform: scale(0.98); }
-
         .input-group { margin-bottom: 15px; }
         .input-group label { display: block; margin-bottom: 8px; font-size: 13px; color: #ced6e0; font-weight: bold;}
         .input-group input { width: 100%; padding: 12px; box-sizing: border-box; border-radius: 8px; border: 1px solid #57606f; background: #2f3542; color: white; font-size: 15px;}
-        .input-group input:focus { outline: none; border-color: #ff4757; box-shadow: 0 0 8px rgba(255,71,87,0.5);}
-
         .pay-btn { width: 100%; background: linear-gradient(45deg, #2ed573, #27ae60); color: white; border: none; padding: 15px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; text-transform: uppercase; transition: 0.3s;}
-        .pay-btn:hover { box-shadow: 0 0 20px rgba(46, 213, 115, 0.6); }
-        .close-btn { background: transparent; color: #a4b0be; border: none; cursor: pointer; float: right; font-size: 24px; transition: 0.2s; padding: 0;}
-        .close-btn:hover { color: #ff4757; }
-
+        .close-btn { background: transparent; color: #a4b0be; border: none; cursor: pointer; float: right; font-size: 24px;}
         .success-box { display: none; text-align: center; }
         .order-id { font-size: 22px; color: #eccc68; font-family: 'Courier New', Courier, monospace; letter-spacing: 2px; margin: 15px 0; padding: 15px; background: #2f3542; border: 2px dashed #eccc68; border-radius: 10px; word-break: break-all;}
-        
         .loader { display: none; text-align: center; margin-top: 20px; font-weight: bold; color: #eccc68; font-size: 14px;}
 
-        /* RESPONSIVE DIZAYN */
+        /* Responsive */
         @media (max-width: 768px) {
             header h1 { font-size: 24px; }
-            nav button { padding: 10px 15px; font-size: 13px; width: 45%; }
-            .grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+            .lang-switcher { top: 10px; right: 10px; }
+            .lang-switcher select { padding: 5px; font-size: 12px;}
+            nav button { padding: 10px; font-size: 12px; width: 45%; }
+            .grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
         }
-
         @media (max-width: 500px) {
-            header h1 { font-size: 20px; }
-            nav { flex-direction: column; gap: 10px; padding: 10px; }
-            nav button { width: 100%; padding: 12px; font-size: 14px; }
+            header h1 { font-size: 18px; margin-top: 15px;}
+            nav { flex-direction: column; }
+            nav button { width: 100%; }
             .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .card { padding: 10px; border-radius: 10px; }
-            .card h3 { font-size: 13px; margin: 8px 0; }
-            .card p.desc { font-size: 10px; height: 28px; margin-bottom: 5px;}
-            .card .price { font-size: 14px; }
-            .card-img-wrapper { height: 80px; margin-bottom: 10px; border-radius: 8px; font-size: 40px !important;}
+            .card { padding: 10px; }
+            .card h3 { font-size: 13px; }
+            .card p.desc { font-size: 10px; height: 28px;}
+            .card .price { font-size: 13px; }
+            .card-img-wrapper { height: 80px; }
             .card img { max-width: 65px; max-height: 65px; }
-            .card button { padding: 8px; font-size: 12px; margin-top: 10px; }
+            .card button { padding: 8px; font-size: 11px; }
+            .card-display { font-size: 15px; padding: 10px;}
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Blox Fruits Shop | By AvgClub</h1>
-        <p style="color: #a4b0be; margin-top: 10px;">O'yin ichidagi eng ishonchli xizmatlar va mevalar xaridi</p>
+        <div class="lang-switcher">
+            <select id="langSelect" onchange="changeLanguage()">
+                <option value="uz">🇺🇿 UZB</option>
+                <option value="ru">🇷🇺 RUS</option>
+                <option value="en">🇬🇧 ENG</option>
+            </select>
+        </div>
+        <h1 id="t-siteName">Blox Fruits Shop | By AvgClub</h1>
+        <p id="t-siteDesc" style="color: #a4b0be; margin-top: 10px;">O'yin ichidagi eng ishonchli xizmatlar va mevalar xaridi</p>
     </header>
 
     <nav>
         <button id="btn-fruits" class="active" onclick="changeSection('fruits')">Mevalar (Perm/Physical)</button>
         <button id="btn-boost" onclick="changeSection('boost')">Account Boost</button>
         <button id="btn-accounts" onclick="changeSection('accounts')">Account Oldi-Sotdi</button>
-        <button onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')">Admin Bilan Bog'lanish</button>
+        <button id="btn-contact" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')">Admin Bilan Bog'lanish</button>
     </nav>
 
     <div class="container" id="main-section">
         <h2 id="section-title">Eng So'nggi Mevalar Ro'yxati</h2>
-        <div class="grid" id="main-grid">
-            </div>
+        <div class="grid" id="main-grid"></div>
     </div>
 
     <div class="modal" id="paymentModal">
         <div class="modal-content" id="paymentForm">
             <button class="close-btn" onclick="closeModal()">✖</button>
-            <h2>Buyurtma Berish</h2>
+            <h2 id="t-modalTitle">Buyurtma Berish</h2>
             <p id="selectedItemName" style="text-align: center; font-size: 15px; font-weight: bold; color: #eccc68; margin-bottom: 20px;"></p>
             
             <div class="payment-instruction">
-                <p>1. Belgilangan summani ushbu kartaga o'tkazing:</p>
+                <p id="t-modalStep1">1. Belgilangan summani ushbu kartaga o'tkazing:</p>
                 <div class="card-display" onclick="copyCard()">
                     💳 5614 6846 0556 8557
-                    <span id="copyText" style="display: block; font-size: 11px; font-family: sans-serif; margin-top: 5px; color: #d2dae2; font-weight: normal;">(Nusxa olish uchun bosing)</span>
+                    <span id="t-modalCopy" style="display: block; font-size: 11px; font-family: sans-serif; margin-top: 5px; color: #d2dae2; font-weight: normal;">(Nusxa olish uchun bosing)</span>
                 </div>
             </div>
 
             <div class="input-group">
-                <label>2. Roblox Username (Nikingizni yozing):</label>
+                <label id="t-modalStep2">2. Roblox Username (Nikingizni yozing):</label>
                 <input type="text" id="robloxUser" placeholder="Sizning nikingiz">
             </div>
             
-            <button class="pay-btn" onclick="processPayment()">Buyurtmani Tasdiqlash</button>
+            <button class="pay-btn" id="t-modalBtn" onclick="processPayment()">Buyurtmani Tasdiqlash</button>
             <div class="loader" id="loader">Buyurtma rasmiylashtirilmoqda... ⏳</div>
         </div>
 
         <div class="modal-content success-box" id="successBox">
-            <h2>✅ Buyurtma Yaratildi!</h2>
-            <p style="color: #ced6e0; font-size: 14px;">Muvaffaqiyatli! Sizning Order ID raqamingiz:</p>
+            <h2 id="t-succTitle">✅ Buyurtma Yaratildi!</h2>
+            <p id="t-succDesc1" style="color: #ced6e0; font-size: 14px;">Muvaffaqiyatli! Sizning Order ID raqamingiz:</p>
             <div class="order-id" id="orderIdDisplay">#ORD-00000</div>
-            <p style="color: #ff4757; font-weight: bold; font-size: 13px;">Diqqat! Buyurtmani to'liq yakunlash uchun, hoziroq to'lov chekini (skrinshot) va shu Order ID ni Telegram orqali adminga yuboring!</p>
-            <button class="pay-btn" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')" style="background: #3742fa;">Adminga Chekni Yuborish ↗</button>
-            <button class="pay-btn" style="background:transparent; border: 2px solid #57606f; margin-top:10px;" onclick="closeModal()">Yopish</button>
+            <p id="t-succDesc2" style="color: #ff4757; font-weight: bold; font-size: 13px;">Diqqat! Buyurtmani to'liq yakunlash uchun, hoziroq to'lov chekini (skrinshot) va shu Order ID ni Telegram orqali adminga yuboring!</p>
+            <button class="pay-btn" id="t-succBtnTg" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')" style="background: #3742fa;">Adminga Chekni Yuborish ↗</button>
+            <button class="pay-btn" id="t-succBtnClose" style="background:transparent; border: 2px solid #57606f; margin-top:10px;" onclick="closeModal()">Yopish</button>
         </div>
     </div>
 
     <script>
-        // 1. MEVALAR BAZASI
+        // --- LUG'AT (Tarjimalar) ---
+        const i18n = {
+            uz: {
+                siteDesc: "O'yin ichidagi eng ishonchli xizmatlar va mevalar xaridi",
+                btnFruits: "Mevalar (Perm/Physical)", btnBoost: "Account Boost", btnAccs: "Account Oldi-Sotdi", btnContact: "Admin Bilan Bog'lanish",
+                titleFruits: "Eng So'nggi Mevalar Ro'yxati", titleBoost: "Account Boost Xizmatlari", titleAccs: "Tayyor Accountlar va Oldi-Sotdi",
+                buyBtn: "Sotib Olish",
+                modalTitle: "Buyurtma Berish", modalSelected: "Tanlandi: ", modalStep1: "1. Belgilangan summani ushbu kartaga o'tkazing:",
+                modalCopy: "(Nusxa olish uchun bosing)", modalStep2: "2. Roblox Username (Nikingizni yozing):",
+                modalInput: "Sizning nikingiz", modalBtn: "Buyurtmani Tasdiqlash", loading: "Buyurtma rasmiylashtirilmoqda... ⏳",
+                succTitle: "✅ Buyurtma Yaratildi!", succDesc1: "Muvaffaqiyatli! Sizning Order ID raqamingiz:",
+                succDesc2: "Diqqat! Buyurtmani to'liq yakunlash uchun, hoziroq to'lov chekini (skrinshot) va shu Order ID ni Telegram orqali adminga yuboring!",
+                succBtnTg: "Adminga Chekni Yuborish ↗", succBtnClose: "Yopish",
+                errInput: "Iltimos, Roblox nikingizni to'g'ri kiriting!", copySuccess: "✅ Nusxa olindi!",
+                fruitDesc: "O'yin ichidagi eng xaridorgir mevalardan biri.",
+                accSellTitle: "Accountni Sotish", accSellDesc: "Account sotmoqchimisiz? Botimizga video va ma'lumotlarni yuboring.", accSellBtn: "Botga O'tish ↗"
+            },
+            ru: {
+                siteDesc: "Самые надежные услуги и покупка фруктов в игре",
+                btnFruits: "Фрукты (Perm/Physical)", btnBoost: "Буст Аккаунта", btnAccs: "Покупка/Продажа Акков", btnContact: "Связаться с Админом",
+                titleFruits: "Список Последних Фруктов", titleBoost: "Услуги Буста Аккаунта", titleAccs: "Готовые Аккаунты и Трейд",
+                buyBtn: "Купить",
+                modalTitle: "Оформить Заказ", modalSelected: "Выбрано: ", modalStep1: "1. Переведите указанную сумму на эту карту:",
+                modalCopy: "(Нажмите, чтобы скопировать)", modalStep2: "2. Roblox Username (Ваш ник):",
+                modalInput: "Ваш никнейм", modalBtn: "Подтвердить Заказ", loading: "Оформление заказа... ⏳",
+                succTitle: "✅ Заказ Создан!", succDesc1: "Успешно! Ваш номер заказа (Order ID):",
+                succDesc2: "Внимание! Для завершения заказа отправьте скриншот чека об оплате и этот Order ID админу в Telegram прямо сейчас!",
+                succBtnTg: "Отправить Чек Админу ↗", succBtnClose: "Закрыть",
+                errInput: "Пожалуйста, введите правильный никнейм Roblox!", copySuccess: "✅ Скопировано!",
+                fruitDesc: "Один из самых востребованных фруктов в игре.",
+                accSellTitle: "Продать Аккаунт", accSellDesc: "Хотите продать аккаунт? Отправьте видео и данные в наш бот.", accSellBtn: "Перейти в Бот ↗"
+            },
+            en: {
+                siteDesc: "The most reliable in-game services and fruit purchases",
+                btnFruits: "Fruits (Perm/Physical)", btnBoost: "Account Boost", btnAccs: "Account Trade", btnContact: "Contact Admin",
+                titleFruits: "Latest Fruits List", titleBoost: "Account Boost Services", titleAccs: "Ready Accounts & Trading",
+                buyBtn: "Buy Now",
+                modalTitle: "Place Order", modalSelected: "Selected: ", modalStep1: "1. Transfer the specified amount to this card:",
+                modalCopy: "(Click to copy)", modalStep2: "2. Roblox Username (Enter your nick):",
+                modalInput: "Your nickname", modalBtn: "Confirm Order", loading: "Processing order... ⏳",
+                succTitle: "✅ Order Created!", succDesc1: "Success! Your Order ID is:",
+                succDesc2: "Attention! To complete the order, send the payment receipt (screenshot) and this Order ID to the admin via Telegram right now!",
+                succBtnTg: "Send Receipt to Admin ↗", succBtnClose: "Close",
+                errInput: "Please enter your valid Roblox nickname!", copySuccess: "✅ Copied!",
+                fruitDesc: "One of the most demanded fruits in the game.",
+                accSellTitle: "Sell Account", accSellDesc: "Want to sell an account? Send video and details to our bot.", accSellBtn: "Go to Bot ↗"
+            }
+        };
+
+        let currentLang = 'uz'; // Standart til
+        let currentSection = 'fruits'; // Qaysi bo'lim ochiq
+
+        // BAZALAR
         const fruitsData = [
             { name: "Rocket", bg: "#747d8c", price: "1,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/cb/Rocket_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120039" },
             { name: "Spin", bg: "#747d8c", price: "1,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/88/Spin_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120258" },
@@ -164,7 +196,6 @@
             { name: "Bomb", bg: "#747d8c", price: "2,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/43/Bomb_Fruit.png/revision/latest/scale-to-width-down/110?cb=20240304195914" },
             { name: "Smoke", bg: "#747d8c", price: "2,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/7e/Smoke_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120224" },
             { name: "Spike", bg: "#3742fa", price: "3,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/ce/Spike_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120251" },
-            { name: "Flame", bg: "#3742fa", price: "3,500", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/ce/Spike_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120251" }, 
             { name: "Ice", bg: "#3742fa", price: "4,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c5/Ice_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115604" },
             { name: "Sand", bg: "#3742fa", price: "4,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/72/Sand_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120103" },
             { name: "Dark", bg: "#3742fa", price: "4,500", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5c/Dark_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115358" },
@@ -200,102 +231,137 @@
             { name: "Dragon", bg: "#eb2f06", price: "50,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/29/Dragon_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241218114129" }
         ];
 
-        // 2. ACCOUNT BOOST BAZASI
-        const boostData = [
-            { name: "Raidga Yordam", bg: "#9b59b6", price: "5,000", desc: "1 ta istalgan qiyin raidni yutib berish (Dough, Buddha va h.k)", icon: "⚔️" },
-            { name: "Race V3 / V4", bg: "#3742fa", price: "25,000", desc: "Race uyg'otishda to'liq yordam berish", icon: "🏃‍♂️" },
-            { name: "Level Ko'tarish", bg: "#2ed573", price: "40,000", desc: "Tezkor level ko'tarib berish (1-Max)", icon: "📈" },
-            { name: "Bounty Hunt", bg: "#eb2f06", price: "20,000", desc: "1 Million Bounty yig'ib berish", icon: "🏴‍☠️" },
-            { name: "Fighting Style", bg: "#f39c12", price: "30,000", desc: "Godhuman yoki boshqa stillarni ochish", icon: "🥋" }
-        ];
+        const boostData = {
+            uz: [
+                { name: "Raidga Yordam", bg: "#9b59b6", price: "5,000", desc: "1 ta istalgan qiyin raidni yutib berish", icon: "⚔️" },
+                { name: "Race V3 / V4", bg: "#3742fa", price: "25,000", desc: "Race uyg'otishda to'liq yordam berish", icon: "🏃‍♂️" },
+                { name: "Level Ko'tarish", bg: "#2ed573", price: "40,000", desc: "Tezkor level ko'tarib berish (1-Max)", icon: "📈" }
+            ],
+            ru: [
+                { name: "Помощь в Рейде", bg: "#9b59b6", price: "5,000", desc: "Пройдем 1 любой сложный рейд", icon: "⚔️" },
+                { name: "Раса V3 / V4", bg: "#3742fa", price: "25,000", desc: "Полная помощь в пробуждении расы", icon: "🏃‍♂️" },
+                { name: "Прокачка Уровня", bg: "#2ed573", price: "40,000", desc: "Быстрая прокачка (1-Max)", icon: "📈" }
+            ],
+            en: [
+                { name: "Raid Help", bg: "#9b59b6", price: "5,000", desc: "Help winning 1 difficult raid", icon: "⚔️" },
+                { name: "Race V3 / V4", bg: "#3742fa", price: "25,000", desc: "Full help in awakening race", icon: "🏃‍♂️" },
+                { name: "Level Boosting", bg: "#2ed573", price: "40,000", desc: "Fast level boosting (1-Max)", icon: "📈" }
+            ]
+        };
 
-        // 3. ACCOUNTLAR BAZASI
-        const accountData = [
-            { name: "Max Level + Kitsune", bg: "#eb2f06", price: "150,000", desc: "Max level (2550), Kitsune yeyilgan, Godhuman ochiq", icon: "👑" },
-            { name: "Max Level + Dough", bg: "#9b59b6", price: "120,000", desc: "Max level, Dough V2, CDK va Soul Guitar mavjud", icon: "🔥" },
-            { name: "Boshlang'ich Smurf", bg: "#3742fa", price: "30,000", desc: "2-Dengizga o'tgan (Level 700+), yaxshi mevali", icon: "⛵" }
-        ];
+        const accountData = {
+            uz: [
+                { name: "Max Level + Kitsune", bg: "#eb2f06", price: "150,000", desc: "Max level, Kitsune yeyilgan", icon: "👑" },
+                { name: "Boshlang'ich Smurf", bg: "#3742fa", price: "30,000", desc: "2-Dengizga o'tgan, yaxshi mevali", icon: "⛵" }
+            ],
+            ru: [
+                { name: "Max Level + Kitsune", bg: "#eb2f06", price: "150,000", desc: "Макс лвл, съеден Kitsune", icon: "👑" },
+                { name: "Смурф Аккаунт", bg: "#3742fa", price: "30,000", desc: "Перешел во 2-е море, топ фрукт", icon: "⛵" }
+            ],
+            en: [
+                { name: "Max Level + Kitsune", bg: "#eb2f06", price: "150,000", desc: "Max level, eaten Kitsune", icon: "👑" },
+                { name: "Starter Smurf", bg: "#3742fa", price: "30,000", desc: "Reached 2nd Sea, good fruit", icon: "⛵" }
+            ]
+        };
 
         let selectedItem = "";
 
-        // SAHIFALARNI ALMASHTIRISH FUNKSIYASI
+        // TILNI O'ZGARTIRISH FUNKSIYASI
+        function changeLanguage() {
+            currentLang = document.getElementById('langSelect').value;
+            const t = i18n[currentLang];
+
+            // Matnlarni almashtirish
+            document.getElementById('t-siteDesc').innerText = t.siteDesc;
+            document.getElementById('btn-fruits').innerText = t.btnFruits;
+            document.getElementById('btn-boost').innerText = t.btnBoost;
+            document.getElementById('btn-accounts').innerText = t.btnAccs;
+            document.getElementById('btn-contact').innerText = t.btnContact;
+            
+            document.getElementById('t-modalTitle').innerText = t.modalTitle;
+            document.getElementById('t-modalStep1').innerText = t.modalStep1;
+            document.getElementById('t-modalCopy').innerText = t.modalCopy;
+            document.getElementById('t-modalStep2').innerText = t.modalStep2;
+            document.getElementById('robloxUser').placeholder = t.modalInput;
+            document.getElementById('t-modalBtn').innerText = t.modalBtn;
+            document.getElementById('loader').innerText = t.loading;
+            
+            document.getElementById('t-succTitle').innerText = t.succTitle;
+            document.getElementById('t-succDesc1').innerText = t.succDesc1;
+            document.getElementById('t-succDesc2').innerText = t.succDesc2;
+            document.getElementById('t-succBtnTg').innerText = t.succBtnTg;
+            document.getElementById('t-succBtnClose').innerText = t.succBtnClose;
+
+            // Ochiq bo'limni yangilash
+            changeSection(currentSection);
+        }
+
         function changeSection(section) {
+            currentSection = section;
+            const t = i18n[currentLang];
             const grid = document.getElementById('main-grid');
             const title = document.getElementById('section-title');
             
-            // Tugmalar rangini o'zgartirish
             document.getElementById('btn-fruits').classList.remove('active');
             document.getElementById('btn-boost').classList.remove('active');
             document.getElementById('btn-accounts').classList.remove('active');
             document.getElementById(`btn-${section}`).classList.add('active');
 
-            grid.innerHTML = ''; // Ekranni tozalash
+            grid.innerHTML = '';
 
             if(section === 'fruits') {
-                title.innerText = "Eng So'nggi Mevalar Ro'yxati";
+                title.innerText = t.titleFruits;
                 fruitsData.forEach(fruit => {
                     grid.innerHTML += `
                         <div class="card">
-                            <div class="card-img-wrapper" style="background-color: ${fruit.bg};">
-                                <img src="${fruit.img}" alt="${fruit.name} Fruit">
-                            </div>
+                            <div class="card-img-wrapper" style="background-color: ${fruit.bg};"><img src="${fruit.img}" alt="${fruit.name}"></div>
                             <h3>${fruit.name}</h3>
-                            <p class="desc">O'yin ichidagi eng xaridorgir mevalardan biri.</p>
+                            <p class="desc">${t.fruitDesc}</p>
                             <p class="price">${fruit.price} UZS</p>
-                            <button onclick="openModal('${fruit.name} (Meva) - ${fruit.price} UZS')">Sotib Olish</button>
-                        </div>
-                    `;
+                            <button onclick="openModal('${fruit.name} - ${fruit.price} UZS')">${t.buyBtn}</button>
+                        </div>`;
                 });
             } 
             else if(section === 'boost') {
-                title.innerText = "Account Boost Xizmatlari";
-                boostData.forEach(boost => {
+                title.innerText = t.titleBoost;
+                boostData[currentLang].forEach(boost => {
                     grid.innerHTML += `
                         <div class="card">
-                            <div class="card-img-wrapper" style="background-color: ${boost.bg}; font-size: 60px;">
-                                ${boost.icon}
-                            </div>
+                            <div class="card-img-wrapper" style="background-color: ${boost.bg}; font-size: 60px;">${boost.icon}</div>
                             <h3>${boost.name}</h3>
                             <p class="desc">${boost.desc}</p>
                             <p class="price">${boost.price} UZS</p>
-                            <button onclick="openModal('${boost.name} (Boost) - ${boost.price} UZS')">Sotib Olish</button>
-                        </div>
-                    `;
+                            <button onclick="openModal('${boost.name} - ${boost.price} UZS')">${t.buyBtn}</button>
+                        </div>`;
                 });
             } 
             else if(section === 'accounts') {
-                title.innerText = "Tayyor Accountlar va Oldi-Sotdi";
-                
-                // Maxsus SOTISH tugmasi
+                title.innerText = t.titleAccs;
                 grid.innerHTML += `
                     <div class="card" style="border-color: #eccc68; box-shadow: 0 0 15px rgba(236, 204, 104, 0.2);">
                         <div class="card-img-wrapper" style="background-color: transparent; font-size: 60px;">📹</div>
-                        <h3 style="color: #eccc68;">Accountni Sotish</h3>
-                        <p class="desc" style="color:#eccc68;">Account sotmoqchimisiz? Botimizga video va ma'lumotlarni yuboring.</p>
-                        <button style="background: linear-gradient(45deg, #f39c12, #d35400); margin-top: auto;" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')">Botga O'tish ↗</button>
-                    </div>
-                `;
+                        <h3 style="color: #eccc68;">${t.accSellTitle}</h3>
+                        <p class="desc" style="color:#eccc68;">${t.accSellDesc}</p>
+                        <button style="background: linear-gradient(45deg, #f39c12, #d35400); margin-top: auto;" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')">${t.accSellBtn}</button>
+                    </div>`;
                 
-                accountData.forEach(acc => {
+                accountData[currentLang].forEach(acc => {
                     grid.innerHTML += `
                         <div class="card">
-                            <div class="card-img-wrapper" style="background-color: ${acc.bg}; font-size: 60px;">
-                                ${acc.icon}
-                            </div>
+                            <div class="card-img-wrapper" style="background-color: ${acc.bg}; font-size: 60px;">${acc.icon}</div>
                             <h3>${acc.name}</h3>
                             <p class="desc">${acc.desc}</p>
                             <p class="price">${acc.price} UZS</p>
-                            <button onclick="openModal('${acc.name} (Account) - ${acc.price} UZS')">Sotib Olish</button>
-                        </div>
-                    `;
+                            <button onclick="openModal('${acc.name} - ${acc.price} UZS')">${t.buyBtn}</button>
+                        </div>`;
                 });
             }
         }
 
-        // To'lov oynasini ochish
         function openModal(itemName) {
+            const t = i18n[currentLang];
             selectedItem = itemName;
-            document.getElementById('selectedItemName').innerText = "Tanlandi: " + itemName;
+            document.getElementById('selectedItemName').innerText = t.modalSelected + itemName;
             document.getElementById('paymentForm').style.display = 'block';
             document.getElementById('successBox').style.display = 'none';
             document.getElementById('paymentModal').style.display = 'flex';
@@ -304,17 +370,17 @@
         function closeModal() {
             document.getElementById('paymentModal').style.display = 'none';
             document.getElementById('robloxUser').value = '';
-            document.getElementById('copyText').innerText = "(Nusxa olish uchun bosing)";
+            document.getElementById('copyText').innerText = i18n[currentLang].modalCopy;
             document.getElementById('copyText').style.color = "#d2dae2";
         }
 
         function copyCard() {
             navigator.clipboard.writeText("5614 6846 0556 8557").then(() => {
                 const copyTxt = document.getElementById('copyText');
-                copyTxt.innerText = "✅ Nusxa olindi!";
+                copyTxt.innerText = i18n[currentLang].copySuccess;
                 copyTxt.style.color = "#2ed573";
                 setTimeout(() => {
-                    copyTxt.innerText = "(Nusxa olish uchun bosing)";
+                    copyTxt.innerText = i18n[currentLang].modalCopy;
                     copyTxt.style.color = "#d2dae2";
                 }, 2000);
             });
@@ -322,9 +388,8 @@
 
         function processPayment() {
             const user = document.getElementById('robloxUser').value;
-
             if(user.length < 3) {
-                alert("Iltimos, Roblox nikingizni to'g'ri kiriting!");
+                alert(i18n[currentLang].errInput);
                 return;
             }
 
@@ -332,7 +397,6 @@
             
             setTimeout(() => {
                 document.getElementById('loader').style.display = 'none';
-                
                 const orderId = "#ORD-" + Math.floor(100000 + Math.random() * 900000);
                 
                 sendToTelegram(orderId, selectedItem, user);
@@ -347,16 +411,12 @@
         function sendToTelegram(orderId, item, robloxUser) {
             const botToken = '8689663085:AAEtRKVPpqOMgjhV1L0rdMDArSSkUpnrafU';
             const adminId = '8572227182';
-            
             const message = `🚨 SAYTDAN YANGI BUYURTMA KELDI!\n\n🧾 Order ID: ${orderId}\n🛍 Xarid: ${item}\n👤 Roblox User: ${robloxUser}\n\n⚠️ Holati: Mijoz buyurtmani rasmiylashtirdi. Hozir botga to'lov chekini tashlashi kerak. Kutib turing!`;
-            
             const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${adminId}&text=${encodeURIComponent(message)}`;
-            
             fetch(url).catch(error => console.error("Xato:", error));
         }
 
-        // Sayt yonganda avtomat Mevalar bo'limi ochiladi
-        window.onload = () => changeSection('fruits');
+        window.onload = () => changeLanguage();
     </script>
 </body>
 </html>
