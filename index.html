@@ -324,7 +324,7 @@
 
     <header>
         <div class="logo">
-            <span class="white-text" id="t-logo1">BLOXX</span><span class="blue-text" id="t-logo2">ER</span>
+            <span class="blue-text" id="t-logo1">AVG</span><span class="white-text" id="t-logo2">CLUB</span>
         </div>
         <nav>
             <button id="btn-fruits" class="active" onclick="changeSection('fruits')">Mevalar / Fruits</button>
@@ -596,7 +596,7 @@
             });
         }
 
-        function processPayment() {
+function processPayment() {
             const user = document.getElementById('robloxUser').value;
             if(user.length < 3) {
                 alert(i18n[currentLang].errInput);
@@ -605,25 +605,32 @@
 
             document.getElementById('loader').style.display = 'block';
             
-            setTimeout(() => {
+            // 1. MIYOYA (Node.js serverga) XABAR YUBORAMIZ
+            // Bu yerda sizning ngrok ko'prigingiz ishlaydi
+            fetch('https://unspiritualised-juristically-leola.ngrok-free.dev/api/buyurtma', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    robloxNik: user,
+                    meva: selectedItem
+                })
+            })
+            .then(() => {
+                // Server buyurtmani eslab qoldi, endi ekranda muvaffaqiyat oynasini chiqaramiz
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    const orderId = "#ORD-" + Math.floor(100000 + Math.random() * 900000);
+                    
+                    document.getElementById('paymentForm').style.display = 'none';
+                    document.getElementById('successBox').style.display = 'block';
+                    document.getElementById('orderIdDisplay').innerText = orderId;
+                }, 1000); 
+            })
+            .catch(err => {
+                console.error("Xato:", err);
+                alert("Server o'chiq! Terminalda 'node server.js' va 'ngrok' ishlayotganini tekshiring.");
                 document.getElementById('loader').style.display = 'none';
-                const orderId = "#ORD-" + Math.floor(100000 + Math.random() * 900000);
-                
-                sendToTelegram(orderId, selectedItem, user);
-
-                document.getElementById('paymentForm').style.display = 'none';
-                document.getElementById('successBox').style.display = 'block';
-                document.getElementById('orderIdDisplay').innerText = orderId;
-                
-            }, 1500); 
-        }
-
-        function sendToTelegram(orderId, item, robloxUser) {
-            const botToken = '8689663085:AAEtRKVPpqOMgjhV1L0rdMDArSSkUpnrafU';
-            const adminId = '8572227182';
-            const message = `🚨 SAYTDAN YANGI PREMIUM BUYURTMA!\n\n🧾 Order ID: ${orderId}\n🛍 Xarid: ${item}\n👤 Roblox Niki: ${robloxUser}\n\n⚠️ Mijoz hozir skrinshot tashlashi kerak.`;
-            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${adminId}&text=${encodeURIComponent(message)}`;
-            fetch(url).catch(error => console.error("Xato:", error));
+            });
         }
 
         window.onload = () => changeLanguage();
