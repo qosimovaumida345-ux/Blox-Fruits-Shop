@@ -4,137 +4,392 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer"> 
-    <title>Blox Fruits Shop | AvgClub</title>
+    <title>Blox Fruits | Premium Shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* Umumiy Dizayn */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0d0d12; background-image: linear-gradient(rgba(13, 13, 18, 0.85), rgba(13, 13, 18, 0.95)), url('https://wallpapercave.com/wp/wp11135759.jpg'); background-size: cover; background-position: center; background-attachment: fixed; color: white; margin: 0; padding: 0; }
-        header { background-color: rgba(20, 20, 30, 0.8); padding: 30px 20px; text-align: center; border-bottom: 3px solid #ff4757; box-shadow: 0 0 20px rgba(255, 71, 87, 0.4); backdrop-filter: blur(10px); position: relative;}
-        header h1 { margin: 0; color: #ff4757; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 10px #ff4757, 0 0 20px #ff4757; font-size: 28px;}
-        
-        .lang-switcher { position: absolute; top: 20px; right: 20px; }
-        .lang-switcher select { background: #2f3542; color: white; border: 2px solid #ff4757; padding: 8px 10px; border-radius: 8px; cursor: pointer; font-weight: bold; outline: none; box-shadow: 0 0 10px rgba(255, 71, 87, 0.3);}
-        
-        nav { display: flex; justify-content: center; gap: 15px; background-color: rgba(30, 39, 46, 0.9); padding: 15px; flex-wrap: wrap; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        nav button { background-color: transparent; color: #d2dae2; border: 2px solid #57606f; padding: 10px 20px; cursor: pointer; border-radius: 8px; font-weight: bold; font-size: 14px; text-transform: uppercase; transition: all 0.3s ease; }
-        nav button:hover, nav button.active { background-color: #ff4757; border-color: #ff4757; color: white; box-shadow: 0 0 15px #ff4757; }
-        
-        .container { padding: 40px 20px; max-width: 1250px; margin: 0 auto; text-align: center; }
-        .container h2 { text-shadow: 0 0 10px rgba(255,255,255,0.3); font-size: 28px; margin-bottom: 30px; color: #eccc68;}
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
-        
-        .card { background-color: rgba(30, 39, 46, 0.85); border: 2px solid #3d3d3d; border-radius: 15px; padding: 20px; transition: all 0.3s ease; backdrop-filter: blur(5px); display: flex; flex-direction: column; justify-content: space-between;}
-        .card:hover { transform: translateY(-5px); border-color: #ff4757; box-shadow: 0 10px 25px rgba(255, 71, 87, 0.3); }
-        .card-img-wrapper { height: 120px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; box-shadow: inset 0 0 20px rgba(0,0,0,0.5); }
-        .card img { max-width: 100px; max-height: 100px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5)); transition: 0.3s; }
-        .card:hover img { transform: scale(1.1); }
-        .card h3 { margin: 10px 0 5px 0; font-size: 20px; text-transform: uppercase; letter-spacing: 1px;}
-        .card p.desc { font-size: 12px; color: #ced6e0; margin-bottom: 15px; height: 35px; overflow: hidden;}
-        .card .price { color: #2ed573; font-weight: bold; font-size: 18px; text-shadow: 0 0 10px rgba(46, 213, 115, 0.5); margin: 5px 0;}
-        .card button { width: 100%; background: linear-gradient(45deg, #ff4757, #ff6b81); color: white; border: none; padding: 12px; margin-top: auto; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 15px; text-transform: uppercase; transition: 0.3s; }
-        .card button:hover { background: linear-gradient(45deg, #ff6b81, #ff4757); box-shadow: 0 0 15px #ff4757; }
-
-        /* To'lov Oynasi (Modal) */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); padding: 10px; box-sizing: border-box;}
-        .modal-content { background: #1e272e; padding: 30px; border-radius: 15px; width: 100%; max-width: 420px; text-align: left; border: 1px solid #ff4757; box-shadow: 0 0 30px rgba(255, 71, 87, 0.2); max-height: 90vh; overflow-y: auto;}
-        .modal-content h2 { color: #ff4757; margin-top: 0; text-align: center; text-shadow: 0 0 10px rgba(255,71,87,0.5); font-size: 24px;}
-        
-        .payment-instruction { background-color: #2f3542; padding: 15px; border-radius: 10px; border-left: 4px solid #3742fa; margin-bottom: 20px;}
-        .payment-instruction p { margin: 0 0 10px 0; font-size: 14px; color: #ced6e0; font-weight: bold; }
-        .card-display { background: linear-gradient(135deg, #3742fa, #5352ed); padding: 15px; border-radius: 8px; text-align: center; font-family: 'Courier New', Courier, monospace; font-size: 20px; font-weight: bold; letter-spacing: 2px; color: white; cursor: pointer; transition: 0.3s; border: 2px solid transparent;}
-        .card-display:hover { transform: scale(1.02); box-shadow: 0 0 15px rgba(55, 66, 250, 0.5); border-color: #70a1ff;}
-        .card-display:active { transform: scale(0.98); }
-
-        .input-group { margin-bottom: 15px; }
-        .input-group label { display: block; margin-bottom: 8px; font-size: 13px; color: #ced6e0; font-weight: bold;}
-        .input-group input { width: 100%; padding: 12px; box-sizing: border-box; border-radius: 8px; border: 1px solid #57606f; background: #2f3542; color: white; font-size: 15px;}
-        .input-group input:focus { outline: none; border-color: #ff4757; box-shadow: 0 0 8px rgba(255,71,87,0.5);}
-
-        .pay-btn { width: 100%; background: linear-gradient(45deg, #2ed573, #27ae60); color: white; border: none; padding: 15px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; text-transform: uppercase; transition: 0.3s;}
-        .pay-btn:hover { box-shadow: 0 0 20px rgba(46, 213, 115, 0.6); }
-        .close-btn { background: transparent; color: #a4b0be; border: none; cursor: pointer; float: right; font-size: 24px;}
-        .success-box { display: none; text-align: center; }
-        .order-id { font-size: 22px; color: #eccc68; font-family: 'Courier New', Courier, monospace; letter-spacing: 2px; margin: 15px 0; padding: 15px; background: #2f3542; border: 2px dashed #eccc68; border-radius: 10px; word-break: break-all;}
-        .loader { display: none; text-align: center; margin-top: 20px; font-weight: bold; color: #eccc68; font-size: 14px;}
-
-        @media (max-width: 768px) {
-            header h1 { font-size: 24px; }
-            .lang-switcher { top: 10px; right: 10px; }
-            .lang-switcher select { padding: 5px; font-size: 12px;}
-            nav button { padding: 10px; font-size: 12px; width: 45%; }
-            .grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+        :root {
+            --bg-main: #ffffff;
+            --header-bg: #000000;
+            --top-bar: #3b82f6;
+            --text-dark: #111827;
+            --text-gray: #6b7280;
+            --accent-pink: #f900a0; /* Bloxxer pushti rangi */
+            --card-blue: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%); /* Rasmdagi ko'k fon */
         }
-        @media (max-width: 500px) {
-            header h1 { font-size: 18px; margin-top: 15px;}
-            nav { flex-direction: column; }
-            nav button { width: 100%; }
-            .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .card { padding: 10px; }
-            .card h3 { font-size: 13px; }
-            .card p.desc { font-size: 10px; height: 28px;}
-            .card .price { font-size: 13px; }
-            .card-img-wrapper { height: 80px; }
-            .card img { max-width: 65px; max-height: 65px; }
-            .card button { padding: 8px; font-size: 11px; }
-            .card-display { font-size: 16px; padding: 10px;}
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- TEPADAGI KO'K OGOHLANTIRISH --- */
+        .top-bar {
+            background-color: var(--top-bar);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* --- QORA HEADER --- */
+        header {
+            background-color: var(--header-bg);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .logo .white-text { color: white; }
+        .logo .blue-text { color: #3b82f6; }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav button {
+            background: transparent;
+            color: white;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.2s;
+            padding: 0;
+        }
+
+        nav button:hover, nav button.active {
+            color: var(--top-bar);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .lang-switcher select {
+            background: transparent;
+            color: white;
+            border: 1px solid #333;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            outline: none;
+        }
+
+        /* --- KATTA REKLAMA (HERO) --- */
+        .hero-wrapper {
+            padding: 20px 5%;
+        }
+        
+        .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://wallpapercave.com/wp/wp11135759.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin: 0 0 15px 0;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin: 0 0 30px 0;
+            color: #e5e7eb;
+        }
+
+        .btn-pink {
+            background-color: var(--accent-pink);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .btn-pink:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(249, 0, 160, 0.3);
+        }
+
+        /* --- MEVALAR BO'LIMI (IMAGE 3 USLUBI) --- */
+        .container {
+            padding: 40px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .collection-header {
+            margin-bottom: 30px;
+        }
+
+        .collection-header h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin: 0 0 20px 0;
+            letter-spacing: -1px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        /* Rasmdagidek toza Kartochka dizayni */
+        .card {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img-area {
+            background: var(--card-blue);
+            height: 240px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Suv to'lqini effekti (Image 3 dagi fon uchun) */
+        .card-img-area::before {
+            content: '';
+            position: absolute;
+            width: 100%; height: 100%;
+            background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 10%, transparent 20%), 
+                              radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 10%, transparent 20%);
+            background-size: 40px 40px;
+            opacity: 0.5;
+        }
+
+        .card-img-area img {
+            max-width: 130px;
+            max-height: 130px;
+            filter: drop-shadow(0 15px 20px rgba(0,0,0,0.4));
+            transition: transform 0.3s;
+            z-index: 2;
+        }
+
+        .card:hover .card-img-area img {
+            transform: scale(1.1);
+        }
+
+        /* Pushti "Save" yozuvi */
+        .badge-pink {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--accent-pink);
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            z-index: 3;
+            box-shadow: 0 4px 10px rgba(249, 0, 160, 0.3);
+        }
+
+        .card-text {
+            padding: 15px 5px;
+        }
+
+        .card-text h3 {
+            margin: 0 0 5px 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .card-text .price {
+            margin: 0;
+            color: var(--text-gray);
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* --- TOZA OQ MODAL (TO'LOV OYNASI) --- */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
+            justify-content: center; align-items: center; z-index: 1000; padding: 20px; box-sizing: border-box;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            width: 100%; max-width: 450px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            position: relative;
+        }
+
+        .modal-content h2 {
+            margin: 0 0 10px 0; font-size: 24px; font-weight: 800; color: var(--text-dark); text-align: center;
+        }
+
+        .close-btn {
+            position: absolute; top: 20px; right: 20px;
+            background: #f3f4f6; border: none; color: var(--text-gray);
+            width: 36px; height: 36px; border-radius: 50%;
+            font-size: 18px; cursor: pointer; transition: 0.2s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .close-btn:hover { background: #e5e7eb; color: var(--text-dark); }
+
+        .payment-instruction {
+            background: #f8fafc; padding: 20px; border-radius: 16px;
+            border: 1px solid #e2e8f0; margin: 20px 0; text-align: center;
+        }
+        
+        .card-display {
+            background: var(--text-dark);
+            padding: 15px; border-radius: 12px; margin-top: 10px;
+            font-family: 'Courier New', Courier, monospace; font-size: 22px; font-weight: bold;
+            letter-spacing: 2px; color: white; cursor: pointer; transition: 0.2s;
+        }
+        .card-display:hover { transform: scale(1.02); }
+
+        .input-group { text-align: left; margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-dark); font-weight: 600;}
+        .input-group input {
+            width: 100%; padding: 15px; box-sizing: border-box; border-radius: 12px;
+            border: 1px solid #d1d5db; background: white;
+            color: var(--text-dark); font-size: 15px; font-family: 'Inter', sans-serif; transition: 0.2s;
+        }
+        .input-group input:focus { outline: none; border-color: var(--top-bar); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);}
+
+        .order-id {
+            font-size: 24px; color: var(--text-dark); font-family: 'Courier New', monospace;
+            font-weight: bold; margin: 15px 0; padding: 15px; background: #f3f4f6;
+            border-radius: 12px; word-break: break-all; text-align: center; border: 2px dashed #d1d5db;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; padding: 15px; }
+            nav { flex-wrap: wrap; justify-content: center; gap: 15px;}
+            .hero h1 { font-size: 28px; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .card-img-area { height: 160px; }
+            .card-img-area img { max-width: 90px; max-height: 90px; }
+            .card-text h3 { font-size: 15px; }
+            .card-text .price { font-size: 13px; }
+            .badge-pink { font-size: 11px; padding: 4px 8px; top: 10px; left: 10px;}
         }
     </style>
 </head>
 <body>
 
+    <div class="top-bar" id="t-topBar">
+        ⚠️ Buyurtma bo'yicha savollar bormi? Biz bilan bog'laning!
+    </div>
+
     <header>
-        <div class="lang-switcher">
-            <select id="langSelect" onchange="changeLanguage()">
-                <option value="uz">🇺🇿 UZB</option>
-                <option value="ru">🇷🇺 RUS</option>
-                <option value="en">🇬🇧 ENG</option>
-            </select>
+        <div class="logo">
+            <span class="white-text" id="t-logo1">BLOXX</span><span class="blue-text" id="t-logo2">ER</span>
         </div>
-        <h1 id="t-siteName">Blox Fruits Shop | By AvgClub</h1>
-        <p id="t-siteDesc" style="color: #a4b0be; margin-top: 10px;">O'yin ichidagi eng ishonchli xizmatlar va mevalar xaridi</p>
+        <nav>
+            <button id="btn-fruits" class="active" onclick="changeSection('fruits')">Mevalar / Fruits</button>
+            <button id="btn-boost" onclick="changeSection('boost')">Boost & Passes</button>
+            <button id="btn-accounts" onclick="changeSection('accounts')">Accounts</button>
+            <button id="btn-contact" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')">Help</button>
+        </nav>
+        <div class="header-actions">
+            <div class="lang-switcher">
+                <select id="langSelect" onchange="changeLanguage()">
+                    <option value="uz">UZ</option>
+                    <option value="ru">RU</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
+        </div>
     </header>
 
-    <nav>
-        <button id="btn-fruits" class="active" onclick="changeSection('fruits')">Mevalar (Perm/Physical)</button>
-        <button id="btn-boost" onclick="changeSection('boost')">Account Boost</button>
-        <button id="btn-accounts" onclick="changeSection('accounts')">Account Oldi-Sotdi</button>
-        <button id="btn-contact" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')">Admin Bilan Bog'lanish</button>
-    </nav>
+    <div class="hero-wrapper">
+        <div class="hero">
+            <h1 id="t-heroTitle">Tezkor Yetkazib Berish - Yoqtirgan Narsangizni Xarid Qiling</h1>
+            <p id="t-heroDesc">Blox Fruits mevalari, akkauntlar va xizmatlarni xavfsiz sotib oling.</p>
+            <button class="btn-pink" id="t-heroBtn" onclick="document.getElementById('main-section').scrollIntoView({behavior: 'smooth'})">O'YINNI TANLASH</button>
+        </div>
+    </div>
 
     <div class="container" id="main-section">
-        <h2 id="section-title">Eng So'nggi Mevalar Ro'yxati</h2>
+        <div class="collection-header">
+            <h2 id="section-title">Escape Tsunami For Brainrots</h2>
+        </div>
         <div class="grid" id="main-grid"></div>
     </div>
 
     <div class="modal" id="paymentModal">
         <div class="modal-content" id="paymentForm">
             <button class="close-btn" onclick="closeModal()">✖</button>
-            <h2 id="t-modalTitle">Buyurtma Berish</h2>
-            <p id="selectedItemName" style="text-align: center; font-size: 15px; font-weight: bold; color: #eccc68; margin-bottom: 20px;"></p>
+            <h2 id="t-modalTitle">Xaridni Tasdiqlash</h2>
+            <p id="selectedItemName" style="text-align: center; font-size: 15px; color: var(--text-gray); margin-bottom: 20px; font-weight: 500;"></p>
             
             <div class="payment-instruction">
-                <p id="t-modalStep1">1. Belgilangan summani ushbu kartaga o'tkazing:</p>
+                <p id="t-modalStep1" style="color: var(--text-dark);">Belgilangan summani quyidagi kartaga o'tkazing:</p>
                 <div class="card-display" onclick="copyCard()">
                     💳 5614 6846 0556 8557
-                    <span id="t-modalCopy" style="display: block; font-size: 12px; font-family: sans-serif; margin-top: 5px; color: #d2dae2; font-weight: normal;">(Nusxa olish uchun bosing)</span>
+                    <span id="t-modalCopy" style="display: block; font-size: 12px; font-family: 'Inter', sans-serif; margin-top: 8px; color: #9ca3af; font-weight: 500;">(Nusxa olish uchun bosing)</span>
                 </div>
             </div>
 
             <div class="input-group">
-                <label id="t-modalStep2">2. Roblox Username (Nikingizni yozing):</label>
-                <input type="text" id="robloxUser" placeholder="Sizning nikingiz">
+                <label id="t-modalStep2">Roblox Username (Nikingiz):</label>
+                <input type="text" id="robloxUser" placeholder="Misol: rip_indra...">
             </div>
             
-            <button class="pay-btn" id="t-modalBtn" onclick="processPayment()">Buyurtmani Tasdiqlash</button>
-            <div class="loader" id="loader">Buyurtma rasmiylashtirilmoqda... ⏳</div>
+            <button class="btn-pink" style="width: 100%; padding: 16px;" id="t-modalBtn" onclick="processPayment()">Buyurtma Berish</button>
+            <div id="loader" style="display: none; text-align: center; margin-top: 15px; color: var(--top-bar); font-size: 14px; font-weight: 600;">Buyurtma rasmiylashtirilmoqda... ⏳</div>
         </div>
 
-        <div class="modal-content success-box" id="successBox">
-            <h2 id="t-succTitle">✅ Buyurtma Yaratildi!</h2>
-            <p id="t-succDesc1" style="color: #ced6e0; font-size: 14px;">Muvaffaqiyatli! Sizning Order ID raqamingiz:</p>
+        <div class="modal-content" id="successBox" style="display: none; text-align: center;">
+            <h2 id="t-succTitle" style="color: #10b981;">✅ Muvaffaqiyatli!</h2>
+            <p id="t-succDesc1" style="color: var(--text-gray); font-size: 15px; margin-top: 10px;">Sizning maxsus Order ID raqamingiz:</p>
             <div class="order-id" id="orderIdDisplay">#ORD-00000</div>
-            <p id="t-succDesc2" style="color: #ff4757; font-weight: bold; font-size: 13px;">Diqqat! Buyurtmani to'liq yakunlash uchun, to'lov chekini (skrinshot) va shu Order ID ni Telegram orqali adminga yuboring!</p>
-            <button class="pay-btn" id="t-succBtnTg" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')" style="background: #3742fa;">Adminga Chekni Yuborish ↗</button>
-            <button class="pay-btn" id="t-succBtnClose" style="background:transparent; border: 2px solid #57606f; margin-top:10px;" onclick="closeModal()">Yopish</button>
+            <p id="t-succDesc2" style="color: var(--text-dark); font-size: 14px; line-height: 1.6; font-weight: 500;">
+                Yakunlash uchun to'lov chekini (skrinshot) va shu Order ID ni Telegram orqali adminga yuboring!
+            </p>
+            <button class="btn-pink" style="width: 100%; margin-top: 15px;" id="t-succBtnTg" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')">Chekni Yuborish ↗</button>
+            <button style="width: 100%; background: white; border: 1px solid #d1d5db; color: var(--text-dark); padding: 15px; border-radius: 12px; font-weight: 600; cursor: pointer; margin-top:10px; font-size: 16px;" id="t-succBtnClose" onclick="closeModal()">Oynani Yopish</button>
         </div>
     </div>
 
@@ -142,49 +397,40 @@
         // LUG'AT
         const i18n = {
             uz: {
-                siteDesc: "O'yin ichidagi eng ishonchli xizmatlar va mevalar xaridi",
-                btnFruits: "Mevalar (Perm/Physical)", btnBoost: "Account Boost", btnAccs: "Account Oldi-Sotdi", btnContact: "Admin Bilan Bog'lanish",
-                titleFruits: "Eng So'nggi Mevalar Ro'yxati", titleBoost: "Account Boost Xizmatlari", titleAccs: "Tayyor Accountlar va Oldi-Sotdi",
-                buyBtn: "Sotib Olish",
-                modalTitle: "Buyurtma Berish", modalSelected: "Tanlandi: ", modalStep1: "1. Belgilangan summani ushbu kartaga o'tkazing:",
-                modalCopy: "(Nusxa olish uchun bosing)", modalStep2: "2. Roblox Username (Nikingizni yozing):",
-                modalInput: "Sizning nikingiz", modalBtn: "Buyurtmani Tasdiqlash", loading: "Buyurtma rasmiylashtirilmoqda... ⏳",
-                succTitle: "✅ Buyurtma Yaratildi!", succDesc1: "Muvaffaqiyatli! Sizning Order ID raqamingiz:",
-                succDesc2: "Diqqat! Buyurtmani to'liq yakunlash uchun, hoziroq to'lov chekini (skrinshot) va shu Order ID ni Telegram orqali adminga yuboring!",
-                succBtnTg: "Adminga Chekni Yuborish ↗", succBtnClose: "Yopish",
-                errInput: "Iltimos, Roblox nikingizni to'g'ri kiriting!", copySuccess: "✅ Nusxa olindi!",
-                fruitDesc: "O'yin ichidagi eng xaridorgir mevalardan biri.",
-                accSellTitle: "Accountni Sotish", accSellDesc: "Account sotmoqchimisiz? Botimizga video va ma'lumotlarni yuboring.", accSellBtn: "Botga O'tish ↗"
+                topBar: "⚠️ Buyurtma bo'yicha savollar bormi? Biz bilan bog'laning!", logo1: "BLOXX", logo2: "ER",
+                btnFruits: "Mevalar / Fruits", btnBoost: "Boost & Passes", btnAccs: "Accounts", btnContact: "Help",
+                heroTitle: "Tezkor Yetkazib Berish - Yoqtirgan Narsangizni Xarid Qiling", heroDesc: "Blox Fruits mevalari, akkauntlar va xizmatlarni xavfsiz sotib oling.", heroBtn: "MAHSULOTLARNI KO'RISH",
+                titleFruits: "Mevalar To'plami (Blox Fruits)", titleBoost: "Tezkor Boost Xizmatlari", titleAccs: "Premium Akkauntlar",
+                modalTitle: "Xaridni Tasdiqlash", modalSelected: "Xarid qilinmoqda: ", modalStep1: "Belgilangan summani quyidagi kartaga o'tkazing:",
+                modalCopy: "(Nusxa olish uchun bosing)", modalStep2: "Roblox Username (Nikingiz):",
+                modalInput: "Misol: rip_indra...", modalBtn: "Buyurtma Berish", loading: "Buyurtma rasmiylashtirilmoqda... ⏳",
+                succTitle: "✅ Muvaffaqiyatli!", succDesc1: "Sizning maxsus Order ID raqamingiz:",
+                succDesc2: "Yakunlash uchun to'lov chekini (skrinshot) va shu Order ID ni Telegram orqali adminga yuboring!",
+                succBtnTg: "Chekni Yuborish ↗", succBtnClose: "Oynani Yopish", errInput: "Iltimos, Roblox nikingizni to'g'ri kiriting!", copySuccess: "✅ Nusxalandi!", saveBadge: "Maxsus "
             },
             ru: {
-                siteDesc: "Самые надежные услуги и покупка фруктов в игре",
-                btnFruits: "Фрукты (Perm/Physical)", btnBoost: "Буст Аккаунта", btnAccs: "Покупка/Продажа Акков", btnContact: "Связаться с Админом",
-                titleFruits: "Список Последних Фруктов", titleBoost: "Услуги Буста Аккаунта", titleAccs: "Готовые Аккаунты и Трейд",
-                buyBtn: "Купить",
-                modalTitle: "Оформить Заказ", modalSelected: "Выбрано: ", modalStep1: "1. Переведите указанную сумму на эту карту:",
-                modalCopy: "(Нажмите, чтобы скопировать)", modalStep2: "2. Roblox Username (Ваш ник):",
-                modalInput: "Ваш никнейм", modalBtn: "Подтвердить Заказ", loading: "Оформление заказа... ⏳",
-                succTitle: "✅ Заказ Создан!", succDesc1: "Успешно! Ваш номер заказа (Order ID):",
-                succDesc2: "Внимание! Для завершения заказа отправьте скриншот чека об оплате и этот Order ID админу в Telegram прямо сейчас!",
-                succBtnTg: "Отправить Чек Админу ↗", succBtnClose: "Закрыть",
-                errInput: "Пожалуйста, введите правильный никнейм Roblox!", copySuccess: "✅ Скопировано!",
-                fruitDesc: "Один из самых востребованных фруктов в игре.",
-                accSellTitle: "Продать Аккаунт", accSellDesc: "Хотите продать аккаунт? Отправьте видео и данные в наш бот.", accSellBtn: "Перейти в Бот ↗"
+                topBar: "⚠️ Есть вопросы по заказу? Свяжитесь с нами!", logo1: "BLOXX", logo2: "ER",
+                btnFruits: "Фрукты / Fruits", btnBoost: "Буст & Пассы", btnAccs: "Аккаунты", btnContact: "Помощь",
+                heroTitle: "Мгновенная Доставка - Купите Любимые Предметы", heroDesc: "Безопасная покупка фруктов, аккаунтов и услуг Blox Fruits.", heroBtn: "ВЫБРАТЬ ИГРУ",
+                titleFruits: "Коллекция Фруктов (Blox Fruits)", titleBoost: "Услуги Быстрого Буста", titleAccs: "Премиум Аккаунты",
+                modalTitle: "Подтверждение Покупки", modalSelected: "Покупка: ", modalStep1: "Переведите указанную сумму на эту карту:",
+                modalCopy: "(Нажмите для копирования)", modalStep2: "Roblox Username (Ваш ник):",
+                modalInput: "Пример: rip_indra...", modalBtn: "Оформить Заказ", loading: "Оформление... ⏳",
+                succTitle: "✅ Успешно!", succDesc1: "Ваш специальный номер заказа (Order ID):",
+                succDesc2: "Для завершения отправьте скриншот чека и этот Order ID админу в Telegram!",
+                succBtnTg: "Отправить Чек ↗", succBtnClose: "Закрыть", errInput: "Введите правильный ник!", copySuccess: "✅ Скопировано!", saveBadge: "Скидка "
             },
             en: {
-                siteDesc: "The most reliable in-game services and fruit purchases",
-                btnFruits: "Fruits (Perm/Physical)", btnBoost: "Account Boost", btnAccs: "Account Trade", btnContact: "Contact Admin",
-                titleFruits: "Latest Fruits List", titleBoost: "Account Boost Services", titleAccs: "Ready Accounts & Trading",
-                buyBtn: "Buy Now",
-                modalTitle: "Place Order", modalSelected: "Selected: ", modalStep1: "1. Transfer the specified amount to this card:",
-                modalCopy: "(Click to copy)", modalStep2: "2. Roblox Username (Enter your nick):",
-                modalInput: "Your nickname", modalBtn: "Confirm Order", loading: "Processing order... ⏳",
-                succTitle: "✅ Order Created!", succDesc1: "Success! Your Order ID is:",
-                succDesc2: "Attention! To complete the order, send the payment receipt (screenshot) and this Order ID to the admin via Telegram right now!",
-                succBtnTg: "Send Receipt to Admin ↗", succBtnClose: "Close",
-                errInput: "Please enter your valid Roblox nickname!", copySuccess: "✅ Copied!",
-                fruitDesc: "One of the most demanded fruits in the game.",
-                accSellTitle: "Sell Account", accSellDesc: "Want to sell an account? Send video and details to our bot.", accSellBtn: "Go to Bot ↗"
+                topBar: "⚠️ Issue with your order? Please contact us!", logo1: "BLOXX", logo2: "ER",
+                btnFruits: "Fruits", btnBoost: "Boost & Passes", btnAccs: "Accounts", btnContact: "Help",
+                heroTitle: "Instant Delivery - Buy Your Favorite Items", heroDesc: "Shop Blox Fruits, Accounts & more. Fast, secure, and reliable.", heroBtn: "SELECT A GAME",
+                titleFruits: "Fruits Collection (Blox Fruits)", titleBoost: "Fast Boost Services", titleAccs: "Premium Accounts",
+                modalTitle: "Confirm Purchase", modalSelected: "Purchasing: ", modalStep1: "Transfer the specified amount to this card:",
+                modalCopy: "(Click to copy)", modalStep2: "Roblox Username (Nickname):",
+                modalInput: "Example: rip_indra...", modalBtn: "Place Order", loading: "Processing... ⏳",
+                succTitle: "✅ Success!", succDesc1: "Your special Order ID number is:",
+                succDesc2: "To complete, send the payment receipt (screenshot) and this Order ID to the admin via Telegram!",
+                succBtnTg: "Send Receipt ↗", succBtnClose: "Close", errInput: "Please enter a valid nickname!", copySuccess: "✅ Copied!", saveBadge: "Save "
             }
         };
 
@@ -192,80 +438,58 @@
         let currentSection = 'fruits'; 
 
         const fruitsData = [
-            { name: "Rocket", bg: "#747d8c", price: "1,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/cb/Rocket_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120039" },
-            { name: "Spin", bg: "#747d8c", price: "1,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/88/Spin_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120258" },
-            { name: "Blade", bg: "#747d8c", price: "1,500", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/01/Blade_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241215033604" },
-            { name: "Spring", bg: "#747d8c", price: "1,500", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8a/Spring_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120418" },
-            { name: "Bomb", bg: "#747d8c", price: "2,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/43/Bomb_Fruit.png/revision/latest/scale-to-width-down/110?cb=20240304195914" },
-            { name: "Smoke", bg: "#747d8c", price: "2,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/7e/Smoke_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120224" },
-            { name: "Spike", bg: "#3742fa", price: "3,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/ce/Spike_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120251" },
-            { name: "Ice", bg: "#3742fa", price: "4,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c5/Ice_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115604" },
-            { name: "Sand", bg: "#3742fa", price: "4,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/72/Sand_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120103" },
-            { name: "Dark", bg: "#3742fa", price: "4,500", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5c/Dark_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115358" },
-            { name: "Eagle", bg: "#3742fa", price: "5,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/53/Eagle_Fruit.png/revision/latest/scale-to-width-down/110?cb=20250418030931" },
-            { name: "Diamond", bg: "#3742fa", price: "5,500", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/88/Diamond_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115405" },
-            { name: "Light", bg: "#9b59b6", price: "8,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/83/Light_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115623" },
-            { name: "Rubber", bg: "#9b59b6", price: "8,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5c/Rubber_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120046" },
-            { name: "Ghost", bg: "#9b59b6", price: "8,500", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8c/Ghost_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115804" },
-            { name: "Magma", bg: "#9b59b6", price: "9,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/27/Magma_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115640" },
-            { name: "Quake", bg: "#9b59b6", price: "10,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/42/Quake_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115754" },
-            { name: "Buddha", bg: "#fd79a8", price: "15,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/df/Buddha_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115325" },
-            { name: "Love", bg: "#fd79a8", price: "12,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b3/Love_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115630" },
-            { name: "Creation", bg: "#fd79a8", price: "14,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/44/Creation_Fruit.png/revision/latest/scale-to-width-down/110?cb=20250913215446" },
-            { name: "Spider", bg: "#fd79a8", price: "12,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/61/Spider_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120241" },
-            { name: "Sound", bg: "#fd79a8", price: "15,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/ba/Sound_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120231" },
-            { name: "Phoenix", bg: "#fd79a8", price: "15,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/fc/Phoenix_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115733" },
-            { name: "Portal", bg: "#fd79a8", price: "18,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8a/Portal_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115746" },
-            { name: "Lightning", bg: "#fd79a8", price: "18,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/78/Lightning_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120057" },
-            { name: "Pain", bg: "#fd79a8", price: "12,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/40/Pain_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115724" },
-            { name: "Blizzard", bg: "#fd79a8", price: "16,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c9/Blizzard_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115313" },
-            { name: "Gravity", bg: "#eb2f06", price: "20,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5f/Gravity_Fruit.png/revision/latest/scale-to-width-down/110?cb=20250418030958" },
-            { name: "Mammoth", bg: "#eb2f06", price: "22,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/95/Mammoth_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115702" },
-            { name: "T-Rex", bg: "#eb2f06", price: "25,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d9/T-Rex_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231226191220" },
-            { name: "Dough", bg: "#eb2f06", price: "28,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/02/Dough_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231210155057" },
-            { name: "Shadow", bg: "#eb2f06", price: "22,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/58/Shadow_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241229033053" },
-            { name: "Venom", bg: "#eb2f06", price: "25,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d2/Venom_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120425" },
-            { name: "Gas", bg: "#eb2f06", price: "36,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ed/Gas_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241223162315" },
-            { name: "Spirit", bg: "#eb2f06", price: "25,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/66/Spirit_Fruit.png/revision/latest/scale-to-width-down/110?cb=20240304190559" },
-            { name: "Tiger", bg: "#eb2f06", price: "45,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/14/Tiger_Fruit.png/revision/latest/scale-to-width-down/110?cb=20251101005924" },
-            { name: "Yeti", bg: "#eb2f06", price: "40,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2f/Yeti_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241226020230" },
-            { name: "Kitsune", bg: "#eb2f06", price: "55,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/65/Kitsune_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241223162956" },
-            { name: "Control", bg: "#eb2f06", price: "42,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/19/Control_Fruit.png/revision/latest/scale-to-width-down/110?cb=20251223165924" },
-            { name: "Dragon", bg: "#eb2f06", price: "100,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/29/Dragon_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241218114129" }
+            { name: "Rocket", price: "1,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/cb/Rocket_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120039" },
+            { name: "Spin", price: "1,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/88/Spin_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120258" },
+            { name: "Blade", price: "1,500", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/01/Blade_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241215033604" },
+            { name: "Spring", price: "1,500", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8a/Spring_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120418" },
+            { name: "Bomb", price: "2,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/43/Bomb_Fruit.png/revision/latest/scale-to-width-down/110?cb=20240304195914" },
+            { name: "Smoke", price: "2,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/7e/Smoke_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120224" },
+            { name: "Spike", price: "3,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/ce/Spike_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120251" },
+            { name: "Ice", price: "4,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c5/Ice_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115604" },
+            { name: "Sand", price: "4,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/72/Sand_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120103" },
+            { name: "Dark", price: "4,500", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5c/Dark_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115358" },
+            { name: "Eagle", price: "5,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/53/Eagle_Fruit.png/revision/latest/scale-to-width-down/110?cb=20250418030931" },
+            { name: "Diamond", price: "5,500", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/88/Diamond_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115405" },
+            { name: "Light", price: "8,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/83/Light_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115623" },
+            { name: "Rubber", price: "8,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5c/Rubber_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120046" },
+            { name: "Ghost", price: "8,500", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8c/Ghost_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115804" },
+            { name: "Magma", price: "9,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/27/Magma_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115640" },
+            { name: "Quake", price: "10,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/42/Quake_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115754" },
+            { name: "Buddha", price: "15,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/df/Buddha_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115325" },
+            { name: "Love", price: "12,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b3/Love_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115630" },
+            { name: "Creation", price: "14,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/44/Creation_Fruit.png/revision/latest/scale-to-width-down/110?cb=20250913215446" },
+            { name: "Spider", price: "12,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/61/Spider_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120241" },
+            { name: "Sound", price: "15,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/ba/Sound_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120231" },
+            { name: "Phoenix", price: "15,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/fc/Phoenix_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115733" },
+            { name: "Portal", price: "18,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8a/Portal_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115746" },
+            { name: "Lightning", price: "18,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/78/Lightning_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120057" },
+            { name: "Pain", price: "12,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/40/Pain_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115724" },
+            { name: "Blizzard", price: "16,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c9/Blizzard_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115313" },
+            { name: "Gravity", price: "20,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5f/Gravity_Fruit.png/revision/latest/scale-to-width-down/110?cb=20250418030958" },
+            { name: "Mammoth", price: "22,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/95/Mammoth_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115702" },
+            { name: "T-Rex", price: "25,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d9/T-Rex_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231226191220" },
+            { name: "Dough", price: "28,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/02/Dough_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231210155057" },
+            { name: "Shadow", price: "22,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/58/Shadow_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241229033053" },
+            { name: "Venom", price: "25,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d2/Venom_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120425" },
+            { name: "Gas", price: "26,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ed/Gas_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241223162315" },
+            { name: "Spirit", price: "25,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/66/Spirit_Fruit.png/revision/latest/scale-to-width-down/110?cb=20240304190559" },
+            { name: "Tiger", price: "35,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/14/Tiger_Fruit.png/revision/latest/scale-to-width-down/110?cb=20251101005924" },
+            { name: "Yeti", price: "30,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2f/Yeti_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241226020230" },
+            { name: "Kitsune", price: "45,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/65/Kitsune_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241223162956" },
+            { name: "Control", price: "22,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/19/Control_Fruit.png/revision/latest/scale-to-width-down/110?cb=20251223165924" },
+            { name: "Dragon", price: "50,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/29/Dragon_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241218114129" }
         ];
 
-        const boostData = {
-            uz: [
-                { name: "Raidga Yordam", bg: "#9b59b6", price: "5,000", desc: "1 ta istalgan qiyin raidni yutib berish", icon: "⚔️" },
-                { name: "Race V3 / V4", bg: "#3742fa", price: "25,000", desc: "Race uyg'otishda to'liq yordam berish", icon: "🏃‍♂️" },
-                { name: "Level Ko'tarish", bg: "#2ed573", price: "40,000", desc: "Tezkor level ko'tarib berish (1-Max)", icon: "📈" }
-            ],
-            ru: [
-                { name: "Помощь в Рейде", bg: "#9b59b6", price: "5,000", desc: "Пройдем 1 любой сложный рейд", icon: "⚔️" },
-                { name: "Раса V3 / V4", bg: "#3742fa", price: "25,000", desc: "Полная помощь в пробуждении расы", icon: "🏃‍♂️" },
-                { name: "Прокачка Уровня", bg: "#2ed573", price: "40,000", desc: "Быстрая прокачка (1-Max)", icon: "📈" }
-            ],
-            en: [
-                { name: "Raid Help", bg: "#9b59b6", price: "5,000", desc: "Help winning 1 difficult raid", icon: "⚔️" },
-                { name: "Race V3 / V4", bg: "#3742fa", price: "25,000", desc: "Full help in awakening race", icon: "🏃‍♂️" },
-                { name: "Level Boosting", bg: "#2ed573", price: "40,000", desc: "Fast level boosting (1-Max)", icon: "📈" }
-            ]
-        };
+        const boostData = [
+            { name: "Raid Help", price: "5,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/30/Microchip.png/revision/latest/scale-to-width-down/110?cb=20220910123512" },
+            { name: "Race V3 / V4", price: "25,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/87/Mirror_Fractal.png/revision/latest/scale-to-width-down/110?cb=20230113190823" },
+            { name: "Level Max", price: "40,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/15/2X_EXP_Boost.png/revision/latest/scale-to-width-down/110?cb=20210214150536" }
+        ];
 
-        const accountData = {
-            uz: [
-                { name: "Max Level + Kitsune", bg: "#eb2f06", price: "150,000", desc: "Max level, Kitsune yeyilgan", icon: "👑" },
-                { name: "Boshlang'ich Smurf", bg: "#3742fa", price: "30,000", desc: "2-Dengizga o'tgan, yaxshi mevali", icon: "⛵" }
-            ],
-            ru: [
-                { name: "Max Level + Kitsune", bg: "#eb2f06", price: "150,000", desc: "Макс лвл, съеден Kitsune", icon: "👑" },
-                { name: "Смурф Аккаунт", bg: "#3742fa", price: "30,000", desc: "Перешел во 2-е море, топ фрукт", icon: "⛵" }
-            ],
-            en: [
-                { name: "Max Level + Kitsune", bg: "#eb2f06", price: "150,000", desc: "Max level, eaten Kitsune", icon: "👑" },
-                { name: "Starter Smurf", bg: "#3742fa", price: "30,000", desc: "Reached 2nd Sea, good fruit", icon: "⛵" }
-            ]
-        };
+        const accountData = [
+            { name: "Max + Kitsune", price: "150,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/65/Kitsune_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241223162956" },
+            { name: "Starter Smurf", price: "30,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/df/Buddha_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115325" }
+        ];
 
         let selectedItem = "";
 
@@ -274,12 +498,18 @@
             currentLang = document.getElementById('langSelect').value;
             const t = i18n[currentLang];
 
-            document.getElementById('t-siteDesc').innerText = t.siteDesc;
+            document.getElementById('t-topBar').innerText = t.topBar;
+            document.getElementById('t-logo1').innerText = t.logo1;
+            document.getElementById('t-logo2').innerText = t.logo2;
             document.getElementById('btn-fruits').innerText = t.btnFruits;
             document.getElementById('btn-boost').innerText = t.btnBoost;
             document.getElementById('btn-accounts').innerText = t.btnAccs;
             document.getElementById('btn-contact').innerText = t.btnContact;
             
+            document.getElementById('t-heroTitle').innerText = t.heroTitle;
+            document.getElementById('t-heroDesc').innerText = t.heroDesc;
+            document.getElementById('t-heroBtn').innerText = t.heroBtn;
+
             document.getElementById('t-modalTitle').innerText = t.modalTitle;
             document.getElementById('t-modalStep1').innerText = t.modalStep1;
             document.getElementById('t-modalCopy').innerText = t.modalCopy;
@@ -309,54 +539,33 @@
             document.getElementById(`btn-${section}`).classList.add('active');
 
             grid.innerHTML = '';
+            let dataToRender = [];
 
             if(section === 'fruits') {
                 title.innerText = t.titleFruits;
-                fruitsData.forEach(fruit => {
-                    grid.innerHTML += `
-                        <div class="card">
-                            <div class="card-img-wrapper" style="background-color: ${fruit.bg};"><img src="${fruit.img}" alt="${fruit.name}"></div>
-                            <h3>${fruit.name}</h3>
-                            <p class="desc">${t.fruitDesc}</p>
-                            <p class="price">${fruit.price} UZS</p>
-                            <button onclick="openModal('${fruit.name} - ${fruit.price} UZS')">${t.buyBtn}</button>
-                        </div>`;
-                });
-            } 
-            else if(section === 'boost') {
+                dataToRender = fruitsData;
+            } else if(section === 'boost') {
                 title.innerText = t.titleBoost;
-                boostData[currentLang].forEach(boost => {
-                    grid.innerHTML += `
-                        <div class="card">
-                            <div class="card-img-wrapper" style="background-color: ${boost.bg}; font-size: 60px;">${boost.icon}</div>
-                            <h3>${boost.name}</h3>
-                            <p class="desc">${boost.desc}</p>
-                            <p class="price">${boost.price} UZS</p>
-                            <button onclick="openModal('${boost.name} - ${boost.price} UZS')">${t.buyBtn}</button>
-                        </div>`;
-                });
-            } 
-            else if(section === 'accounts') {
+                dataToRender = boostData;
+            } else if(section === 'accounts') {
                 title.innerText = t.titleAccs;
-                grid.innerHTML += `
-                    <div class="card" style="border-color: #eccc68; box-shadow: 0 0 15px rgba(236, 204, 104, 0.2);">
-                        <div class="card-img-wrapper" style="background-color: transparent; font-size: 60px;">📹</div>
-                        <h3 style="color: #eccc68;">${t.accSellTitle}</h3>
-                        <p class="desc" style="color:#eccc68;">${t.accSellDesc}</p>
-                        <button style="background: linear-gradient(45deg, #f39c12, #d35400); margin-top: auto;" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')">${t.accSellBtn}</button>
-                    </div>`;
-                
-                accountData[currentLang].forEach(acc => {
-                    grid.innerHTML += `
-                        <div class="card">
-                            <div class="card-img-wrapper" style="background-color: ${acc.bg}; font-size: 60px;">${acc.icon}</div>
-                            <h3>${acc.name}</h3>
-                            <p class="desc">${acc.desc}</p>
-                            <p class="price">${acc.price} UZS</p>
-                            <button onclick="openModal('${acc.name} - ${acc.price} UZS')">${t.buyBtn}</button>
-                        </div>`;
-                });
+                dataToRender = accountData;
             }
+
+            // KARTALARNI YARATISH (IMAGE 3 USLUBI)
+            dataToRender.forEach(item => {
+                grid.innerHTML += `
+                    <div class="card" onclick="openModal('${item.name} - ${item.price} UZS')">
+                        <div class="card-img-area">
+                            <span class="badge-pink">${t.saveBadge} ${item.price} UZS</span>
+                            <img src="${item.img}" alt="${item.name}">
+                        </div>
+                        <div class="card-text">
+                            <h3>${item.name}</h3>
+                            <p class="price">${item.price} UZS</p>
+                        </div>
+                    </div>`;
+            });
         }
 
         function openModal(itemName) {
@@ -372,17 +581,17 @@
             document.getElementById('paymentModal').style.display = 'none';
             document.getElementById('robloxUser').value = '';
             document.getElementById('copyText').innerText = i18n[currentLang].modalCopy;
-            document.getElementById('copyText').style.color = "#d2dae2";
+            document.getElementById('copyText').style.color = "#9ca3af";
         }
 
         function copyCard() {
             navigator.clipboard.writeText("5614 6846 0556 8557").then(() => {
                 const copyTxt = document.getElementById('copyText');
                 copyTxt.innerText = i18n[currentLang].copySuccess;
-                copyTxt.style.color = "#2ed573";
+                copyTxt.style.color = "#3b82f6";
                 setTimeout(() => {
                     copyTxt.innerText = i18n[currentLang].modalCopy;
-                    copyTxt.style.color = "#d2dae2";
+                    copyTxt.style.color = "#9ca3af";
                 }, 2000);
             });
         }
@@ -412,7 +621,7 @@
         function sendToTelegram(orderId, item, robloxUser) {
             const botToken = '8689663085:AAEtRKVPpqOMgjhV1L0rdMDArSSkUpnrafU';
             const adminId = '8572227182';
-            const message = `🚨 SAYTDAN YANGI BUYURTMA KELDI!\n\n🧾 Order ID: ${orderId}\n🛍 Xarid: ${item}\n👤 Roblox User: ${robloxUser}\n\n⚠️ Holati: Mijoz buyurtmani rasmiylashtirdi. Hozir botga to'lov chekini tashlashi kerak. Kutib turing!`;
+            const message = `🚨 SAYTDAN YANGI PREMIUM BUYURTMA!\n\n🧾 Order ID: ${orderId}\n🛍 Xarid: ${item}\n👤 Roblox Niki: ${robloxUser}\n\n⚠️ Mijoz hozir skrinshot tashlashi kerak.`;
             const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${adminId}&text=${encodeURIComponent(message)}`;
             fetch(url).catch(error => console.error("Xato:", error));
         }
@@ -421,4 +630,3 @@
     </script>
 </body>
 </html>
-
