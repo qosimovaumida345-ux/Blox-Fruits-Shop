@@ -713,11 +713,16 @@
             document.getElementById('paymentModal').style.display = 'flex';
         }
 
-        function closeModal() {
+      function closeModal() {
             document.getElementById('paymentModal').style.display = 'none';
             document.getElementById('robloxUser').value = '';
-            document.getElementById('copyText').innerText = i18n[currentLang].modalCopy;
-            document.getElementById('copyText').style.color = "#9ca3af";
+            
+            // Xato shu yerda edi: copyText o'rniga to'g'ri ID ni (t-modalCopy) yozamiz
+            const copyTxt = document.getElementById('t-modalCopy');
+            if (copyTxt) {
+                copyTxt.innerText = i18n[currentLang].modalCopy;
+                copyTxt.style.color = "#9ca3af";
+            }
         }
 
         function copyCard() {
@@ -773,3 +778,4 @@
 </body>
 
 </html>
+
