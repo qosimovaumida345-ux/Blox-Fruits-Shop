@@ -20,14 +20,14 @@ app.post('/api/buyurtma', (req, res) => {
 });
 
 // 2. Telefonda SMS kelganda ishlovchi qism
-const ishonchliRaqamlar = ['8888', 'click', 'payme', 'uzum', 'nbu', 'cardinfo', 'uzcard', 'humo', 'sms-inform'];
+const ishonchliRaqamlar = ['8888', 'Click', 'payme', 'Uzum', 'NBU', 'CARDINFO', 'Paynet', 'Uzcard', 'Humo', 'sms-inform'];
 
 app.post('/api/tolov', (req, res) => {
     const { sender, message } = req.body;
     const yuboruvchi = sender ? sender.toString().toLowerCase() : "";
     const smsMatn = message ? message.toLowerCase() : "";
 
-    if (ishonchliRaqamlar.includes(yuboruvchi) && (smsMatn.includes('kirim') || smsMatn.includes('tushdi'))) {
+   if (ishonchliRaqamlar.includes(yuboruvchi) && (smsMatn.includes('kirim') || smsMatn.includes('tushdi') || smsMatn.includes("to'lov o'tdi") || smsMatn.includes("tolov otdi") || smsMatn.includes("qabul qilindi"))) {
         const summaUshlagich = smsMatn.match(/(\d[\d\s]*)(so'm|uzs|sum)/i);
         
         if (summaUshlagich) {
@@ -45,5 +45,6 @@ app.post('/api/tolov', (req, res) => {
     }
     res.status(200).send({ success: true });
 });
+
 
 app.listen(3000, () => console.log('🚀 Server 3000-portda va botga ulangan!'));
