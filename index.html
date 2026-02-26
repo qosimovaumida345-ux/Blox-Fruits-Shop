@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="uz">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="no-referrer"> 
+    <meta name="referrer" content="no-referrer">
     <title>Blox Fruits | Premium Shop</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
             --bg-main: #ffffff;
@@ -14,8 +15,10 @@
             --top-bar: #3b82f6;
             --text-dark: #111827;
             --text-gray: #6b7280;
-            --accent-pink: #f900a0; /* Bloxxer pushti rangi */
-            --card-blue: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%); /* Rasmdagi ko'k fon */
+            --accent-pink: #f900a0;
+            /* Bloxxer pushti rangi */
+            --card-blue: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+            /* Rasmdagi ko'k fon */
         }
 
         body {
@@ -54,8 +57,14 @@
             font-weight: 800;
             letter-spacing: -0.5px;
         }
-        .logo .white-text { color: white; }
-        .logo .blue-text { color: #3b82f6; }
+
+        .logo .white-text {
+            color: white;
+        }
+
+        .logo .blue-text {
+            color: #3b82f6;
+        }
 
         nav {
             display: flex;
@@ -74,7 +83,8 @@
             padding: 0;
         }
 
-        nav button:hover, nav button.active {
+        nav button:hover,
+        nav button.active {
             color: var(--top-bar);
         }
 
@@ -100,9 +110,9 @@
         .hero-wrapper {
             padding: 20px 5%;
         }
-        
+
         .hero {
-            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://wallpapercave.com/wp/wp11135759.jpg');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://wallpapercave.com/wp/wp11135759.jpg');
             background-size: cover;
             background-position: center;
             border-radius: 20px;
@@ -136,7 +146,7 @@
             transition: transform 0.2s, box-shadow 0.2s;
             font-family: 'Inter', sans-serif;
         }
-        
+
         .btn-pink:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(249, 0, 160, 0.3);
@@ -193,9 +203,10 @@
         .card-img-area::before {
             content: '';
             position: absolute;
-            width: 100%; height: 100%;
-            background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 10%, transparent 20%), 
-                              radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 10%, transparent 20%);
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 10%, transparent 20%),
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 10%, transparent 20%);
             background-size: 40px 40px;
             opacity: 0.5;
         }
@@ -203,7 +214,7 @@
         .card-img-area img {
             max-width: 130px;
             max-height: 130px;
-            filter: drop-shadow(0 15px 20px rgba(0,0,0,0.4));
+            filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.4));
             transition: transform 0.3s;
             z-index: 2;
         }
@@ -247,75 +258,185 @@
 
         /* --- TOZA OQ MODAL (TO'LOV OYNASI) --- */
         .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
-            justify-content: center; align-items: center; z-index: 1000; padding: 20px; box-sizing: border-box;
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        
+
         .modal-content {
             background: white;
             padding: 40px;
             border-radius: 24px;
-            width: 100%; max-width: 450px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             position: relative;
         }
 
         .modal-content h2 {
-            margin: 0 0 10px 0; font-size: 24px; font-weight: 800; color: var(--text-dark); text-align: center;
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-dark);
+            text-align: center;
         }
 
         .close-btn {
-            position: absolute; top: 20px; right: 20px;
-            background: #f3f4f6; border: none; color: var(--text-gray);
-            width: 36px; height: 36px; border-radius: 50%;
-            font-size: 18px; cursor: pointer; transition: 0.2s;
-            display: flex; align-items: center; justify-content: center;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f3f4f6;
+            border: none;
+            color: var(--text-gray);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .close-btn:hover { background: #e5e7eb; color: var(--text-dark); }
+
+        .close-btn:hover {
+            background: #e5e7eb;
+            color: var(--text-dark);
+        }
 
         .payment-instruction {
-            background: #f8fafc; padding: 20px; border-radius: 16px;
-            border: 1px solid #e2e8f0; margin: 20px 0; text-align: center;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            margin: 20px 0;
+            text-align: center;
         }
-        
+
         .card-display {
             background: var(--text-dark);
-            padding: 15px; border-radius: 12px; margin-top: 10px;
-            font-family: 'Courier New', Courier, monospace; font-size: 22px; font-weight: bold;
-            letter-spacing: 2px; color: white; cursor: pointer; transition: 0.2s;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
         }
-        .card-display:hover { transform: scale(1.02); }
 
-        .input-group { text-align: left; margin-bottom: 20px; }
-        .input-group label { display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-dark); font-weight: 600;}
-        .input-group input {
-            width: 100%; padding: 15px; box-sizing: border-box; border-radius: 12px;
-            border: 1px solid #d1d5db; background: white;
-            color: var(--text-dark); font-size: 15px; font-family: 'Inter', sans-serif; transition: 0.2s;
+        .card-display:hover {
+            transform: scale(1.02);
         }
-        .input-group input:focus { outline: none; border-color: var(--top-bar); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);}
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            border-radius: 12px;
+            border: 1px solid #d1d5db;
+            background: white;
+            color: var(--text-dark);
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: 0.2s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--top-bar);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
 
         .order-id {
-            font-size: 24px; color: var(--text-dark); font-family: 'Courier New', monospace;
-            font-weight: bold; margin: 15px 0; padding: 15px; background: #f3f4f6;
-            border-radius: 12px; word-break: break-all; text-align: center; border: 2px dashed #d1d5db;
+            font-size: 24px;
+            color: var(--text-dark);
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f3f4f6;
+            border-radius: 12px;
+            word-break: break-all;
+            text-align: center;
+            border: 2px dashed #d1d5db;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            header { flex-direction: column; gap: 15px; padding: 15px; }
-            nav { flex-wrap: wrap; justify-content: center; gap: 15px;}
-            .hero h1 { font-size: 28px; }
-            .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .card-img-area { height: 160px; }
-            .card-img-area img { max-width: 90px; max-height: 90px; }
-            .card-text h3 { font-size: 15px; }
-            .card-text .price { font-size: 13px; }
-            .badge-pink { font-size: 11px; padding: 4px 8px; top: 10px; left: 10px;}
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .card-img-area {
+                height: 160px;
+            }
+
+            .card-img-area img {
+                max-width: 90px;
+                max-height: 90px;
+            }
+
+            .card-text h3 {
+                font-size: 15px;
+            }
+
+            .card-text .price {
+                font-size: 13px;
+            }
+
+            .badge-pink {
+                font-size: 11px;
+                padding: 4px 8px;
+                top: 10px;
+                left: 10px;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="top-bar" id="t-topBar">
@@ -330,7 +451,8 @@
             <button id="btn-fruits" class="active" onclick="changeSection('fruits')">Mevalar / Fruits</button>
             <button id="btn-boost" onclick="changeSection('boost')">Boost & Passes</button>
             <button id="btn-accounts" onclick="changeSection('accounts')">Accounts</button>
-            <button id="btn-contact" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')">Help</button>
+            <button id="btn-contact"
+                onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')">Help</button>
         </nav>
         <div class="header-actions">
             <div class="lang-switcher">
@@ -347,7 +469,9 @@
         <div class="hero">
             <h1 id="t-heroTitle">Tezkor Yetkazib Berish - Yoqtirgan Narsangizni Xarid Qiling</h1>
             <p id="t-heroDesc">Blox Fruits mevalari, akkauntlar va xizmatlarni xavfsiz sotib oling.</p>
-            <button class="btn-pink" id="t-heroBtn" onclick="document.getElementById('main-section').scrollIntoView({behavior: 'smooth'})">O'YINNI TANLASH</button>
+            <button class="btn-pink" id="t-heroBtn"
+                onclick="document.getElementById('main-section').scrollIntoView({behavior: 'smooth'})">O'YINNI
+                TANLASH</button>
         </div>
     </div>
 
@@ -362,13 +486,18 @@
         <div class="modal-content" id="paymentForm">
             <button class="close-btn" onclick="closeModal()">✖</button>
             <h2 id="t-modalTitle">Xaridni Tasdiqlash</h2>
-            <p id="selectedItemName" style="text-align: center; font-size: 15px; color: var(--text-gray); margin-bottom: 20px; font-weight: 500;"></p>
-            
+            <p id="selectedItemName"
+                style="text-align: center; font-size: 15px; color: var(--text-gray); margin-bottom: 20px; font-weight: 500;">
+            </p>
+
             <div class="payment-instruction">
-                <p id="t-modalStep1" style="color: var(--text-dark);">Belgilangan summani quyidagi kartaga o'tkazing:</p>
+                <p id="t-modalStep1" style="color: var(--text-dark);">Belgilangan summani quyidagi kartaga o'tkazing:
+                </p>
                 <div class="card-display" onclick="copyCard()">
                     💳 5614 6846 0556 8557
-                    <span id="t-modalCopy" style="display: block; font-size: 12px; font-family: 'Inter', sans-serif; margin-top: 8px; color: #9ca3af; font-weight: 500;">(Nusxa olish uchun bosing)</span>
+                    <span id="t-modalCopy"
+                        style="display: block; font-size: 12px; font-family: 'Inter', sans-serif; margin-top: 8px; color: #9ca3af; font-weight: 500;">(Nusxa
+                        olish uchun bosing)</span>
                 </div>
             </div>
 
@@ -376,20 +505,27 @@
                 <label id="t-modalStep2">Roblox Username (Nikingiz):</label>
                 <input type="text" id="robloxUser" placeholder="Misol: rip_indra...">
             </div>
-            
-            <button class="btn-pink" style="width: 100%; padding: 16px;" id="t-modalBtn" onclick="processPayment()">Buyurtma Berish</button>
-            <div id="loader" style="display: none; text-align: center; margin-top: 15px; color: var(--top-bar); font-size: 14px; font-weight: 600;">Buyurtma rasmiylashtirilmoqda... ⏳</div>
+
+            <button class="btn-pink" style="width: 100%; padding: 16px;" id="t-modalBtn"
+                onclick="processPayment()">Buyurtma Berish</button>
+            <div id="loader"
+                style="display: none; text-align: center; margin-top: 15px; color: var(--top-bar); font-size: 14px; font-weight: 600;">
+                Buyurtma rasmiylashtirilmoqda... ⏳</div>
         </div>
 
         <div class="modal-content" id="successBox" style="display: none; text-align: center;">
             <h2 id="t-succTitle" style="color: #10b981;">✅ Muvaffaqiyatli!</h2>
-            <p id="t-succDesc1" style="color: var(--text-gray); font-size: 15px; margin-top: 10px;">Sizning maxsus Order ID raqamingiz:</p>
+            <p id="t-succDesc1" style="color: var(--text-gray); font-size: 15px; margin-top: 10px;">Sizning maxsus Order
+                ID raqamingiz:</p>
             <div class="order-id" id="orderIdDisplay">#ORD-00000</div>
             <p id="t-succDesc2" style="color: var(--text-dark); font-size: 14px; line-height: 1.6; font-weight: 500;">
                 Yakunlash uchun to'lov chekini (skrinshot) va shu Order ID ni Telegram orqali adminga yuboring!
             </p>
-            <button class="btn-pink" style="width: 100%; margin-top: 15px;" id="t-succBtnTg" onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')">Chekni Yuborish ↗</button>
-            <button style="width: 100%; background: white; border: 1px solid #d1d5db; color: var(--text-dark); padding: 15px; border-radius: 12px; font-weight: 600; cursor: pointer; margin-top:10px; font-size: 16px;" id="t-succBtnClose" onclick="closeModal()">Oynani Yopish</button>
+            <button class="btn-pink" style="width: 100%; margin-top: 15px;" id="t-succBtnTg"
+                onclick="window.open('https://t.me/BloxFruitsShopBy_AvgClub', '_blank')">Chekni Yuborish ↗</button>
+            <button
+                style="width: 100%; background: white; border: 1px solid #d1d5db; color: var(--text-dark); padding: 15px; border-radius: 12px; font-weight: 600; cursor: pointer; margin-top:10px; font-size: 16px;"
+                id="t-succBtnClose" onclick="closeModal()">Oynani Yopish</button>
         </div>
     </div>
 
@@ -434,8 +570,8 @@
             }
         };
 
-        let currentLang = 'uz'; 
-        let currentSection = 'fruits'; 
+        let currentLang = 'uz';
+        let currentSection = 'fruits';
 
         const fruitsData = [
             { name: "Rocket", price: "1,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/cb/Rocket_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120039" },
@@ -505,7 +641,7 @@
             document.getElementById('btn-boost').innerText = t.btnBoost;
             document.getElementById('btn-accounts').innerText = t.btnAccs;
             document.getElementById('btn-contact').innerText = t.btnContact;
-            
+
             document.getElementById('t-heroTitle').innerText = t.heroTitle;
             document.getElementById('t-heroDesc').innerText = t.heroDesc;
             document.getElementById('t-heroBtn').innerText = t.heroBtn;
@@ -517,7 +653,7 @@
             document.getElementById('robloxUser').placeholder = t.modalInput;
             document.getElementById('t-modalBtn').innerText = t.modalBtn;
             document.getElementById('loader').innerText = t.loading;
-            
+
             document.getElementById('t-succTitle').innerText = t.succTitle;
             document.getElementById('t-succDesc1').innerText = t.succDesc1;
             document.getElementById('t-succDesc2').innerText = t.succDesc2;
@@ -532,7 +668,7 @@
             const t = i18n[currentLang];
             const grid = document.getElementById('main-grid');
             const title = document.getElementById('section-title');
-            
+
             document.getElementById('btn-fruits').classList.remove('active');
             document.getElementById('btn-boost').classList.remove('active');
             document.getElementById('btn-accounts').classList.remove('active');
@@ -541,13 +677,13 @@
             grid.innerHTML = '';
             let dataToRender = [];
 
-            if(section === 'fruits') {
+            if (section === 'fruits') {
                 title.innerText = t.titleFruits;
                 dataToRender = fruitsData;
-            } else if(section === 'boost') {
+            } else if (section === 'boost') {
                 title.innerText = t.titleBoost;
                 dataToRender = boostData;
-            } else if(section === 'accounts') {
+            } else if (section === 'accounts') {
                 title.innerText = t.titleAccs;
                 dataToRender = accountData;
             }
@@ -596,18 +732,17 @@
             });
         }
 
-function processPayment() {
+        function processPayment() {
             const user = document.getElementById('robloxUser').value;
-            if(user.length < 3) {
+            if (user.length < 3) {
                 alert(i18n[currentLang].errInput);
                 return;
             }
 
             document.getElementById('loader').style.display = 'block';
-            
-            // 1. MIYOYA (Node.js serverga) XABAR YUBORAMIZ
-            // Bu yerda sizning ngrok ko'prigingiz ishlaydi
-            fetch('https://unspiritualised-juristically-leola.ngrok-free.dev/api/buyurtma', {
+
+            // Eski Ngrok o'rniga yangi Render silkasini yozing
+            fetch('https://blox-fruits-shop.onrender.com/api/buyurtma', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -615,25 +750,26 @@ function processPayment() {
                     meva: selectedItem
                 })
             })
-            .then(() => {
-                // Server buyurtmani eslab qoldi, endi ekranda muvaffaqiyat oynasini chiqaramiz
-                setTimeout(() => {
+                .then(() => {
+                    // Server buyurtmani eslab qoldi, endi ekranda muvaffaqiyat oynasini chiqaramiz
+                    setTimeout(() => {
+                        document.getElementById('loader').style.display = 'none';
+                        const orderId = "#ORD-" + Math.floor(100000 + Math.random() * 900000);
+
+                        document.getElementById('paymentForm').style.display = 'none';
+                        document.getElementById('successBox').style.display = 'block';
+                        document.getElementById('orderIdDisplay').innerText = orderId;
+                    }, 1000);
+                })
+                .catch(err => {
+                    console.error("Xato:", err);
+                    alert("Server o'chiq! Terminalda 'node server.js' va 'ngrok' ishlayotganini tekshiring.");
                     document.getElementById('loader').style.display = 'none';
-                    const orderId = "#ORD-" + Math.floor(100000 + Math.random() * 900000);
-                    
-                    document.getElementById('paymentForm').style.display = 'none';
-                    document.getElementById('successBox').style.display = 'block';
-                    document.getElementById('orderIdDisplay').innerText = orderId;
-                }, 1000); 
-            })
-            .catch(err => {
-                console.error("Xato:", err);
-                alert("Server o'chiq! Terminalda 'node server.js' va 'ngrok' ishlayotganini tekshiring.");
-                document.getElementById('loader').style.display = 'none';
-            });
+                });
         }
 
         window.onload = () => changeLanguage();
     </script>
 </body>
+
 </html>
