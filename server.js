@@ -10,12 +10,20 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// TELEGRAM BOT VA KANAL SOZLAMALARI
+// ==========================================
+// 1. ASOSIY SOZLAMALAR (TOKEN VA SILKALAR)
+// ==========================================
 const BOT_TOKEN = '8689663085:AAEtRKVPpqOMgjhV1L0rdMDArSSkUpnrafU';
 const ADMIN_GROUP_ID = '-1003830831325'; 
+
+// BotFather'ga bergan Render silkangiz aynan shu yerda turadi:
+const WEB_APP_URL = 'https://blox-fruits-shop.onrender.com';
+
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
-// SUPABASE BAZASIGA ULANISH
+// ==========================================
+// 2. SUPABASE BAZASIGA ULANISH
+// ==========================================
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL || 'postgresql://postgres.pkgewbdmisovwpccneho:abdulloh2011%2F@aws-1-ap-northeast-2.pooler.supabase.com:6543/postgres',
     ssl: { rejectUnauthorized: false }
@@ -40,7 +48,20 @@ app.use(session({
     resave: false, saveUninitialized: false, cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }
 }));
 
-// SAHIFALAR VA AVTORIZATSIYA
+// ==========================================
+// 3. TELEGRAM BOT BUYRUQLARI (WEB APP UCHUN)
+// ==========================================
+bot.onText(/\/start/, (msg) => {
+    bot.sendMessage(msg.chat.id, "🌟 **AVG CLUB | BLOX FRUITS** do'koniga xush kelibsiz!\n\nXaridni boshlash uchun quyidagi tugmani bosing:", {
+        reply_markup: {
+            inline_keyboard: [[{ text: "🚀 Do'konni Ochish", web_app: { url: WEB_APP_URL } }]]
+        }
+    });
+});
+
+// ==========================================
+// 4. SAHIFALAR VA AVTORIZATSIYA
+// ==========================================
 app.get('/', (req, res) => {
     if (req.session.userId) return res.redirect('/shop');
     res.render('login');
@@ -76,7 +97,9 @@ app.post('/auth/login', async (req, res) => {
 
 app.get('/auth/logout', (req, res) => { req.session.destroy(); res.redirect('/'); });
 
-// TELEGRAM ULASH VA BUYURTMA BERISH
+// ==========================================
+// 5. TELEGRAM ULASH VA BUYURTMA BERISH
+// ==========================================
 app.post('/api/sync-telegram', async (req, res) => {
     if (!req.session.userId) return res.status(403).json({ error: "Login qiling" });
     const { tg_id, tg_username } = req.body;
@@ -121,10 +144,15 @@ app.post('/api/buyurtma', async (req, res) => {
     }
 });
 
-// MACRODROID (SMS ORQALI TO'LOV)
+// ==========================================
+// 6. MACRODROID (SMS ORQALI TO'LOV)
+// ==========================================
 const ishonchliRaqamlar = ['8888', 'click', 'payme', 'uzum', 'paynet', 'nbu', 'cardinfo', 'uzcard', 'humo', 'sms-inform'];
 
 app.post('/api/tolov', (req, res) => {
+    // SMS KELGANINI TEKSHIRISH UCHUN LOG
+    console.log("📨 MACRODROID DAN SMS KELDI:", req.body); 
+
     const { sender, message } = req.body;
     const yuboruvchi = sender ? sender.toString().toLowerCase() : "";
     const smsMatn = message ? message.toLowerCase() : "";
@@ -137,7 +165,7 @@ app.post('/api/tolov', (req, res) => {
             bot.sendMessage(ADMIN_GROUP_ID, text, { parse_mode: 'HTML' });
         }
     }
-    res.status(200).send({ success: true });
+    res.status(200).send({ success: true, message: "Server SMS ni qabul qildi" });
 });
 
 app.listen(PORT, () => console.log(`🚀 Blox Fruits Server ${PORT}-portda ishladi!`));
