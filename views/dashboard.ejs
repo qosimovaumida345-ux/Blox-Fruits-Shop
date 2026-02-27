@@ -3,104 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVG CLUB - Blox Fruits Shop</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <title>Blox Fruits | Premium Shop</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --bg-main: #ffffff; --header-bg: #000000; --top-bar: #3b82f6; --text-dark: #111827; --text-gray: #6b7280; --accent-pink: #f900a0; --card-blue: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%); }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-dark); margin: 0; padding: 0; overflow-x: hidden; }
+        :root { --teal: #38c2c2; --teal-dark: #266b6b; --bg-main: #f0fbfb; --text-main: #1b4d4d; --white: #ffffff; }
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg-main); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
         
-        /* Foydalanuvchi paneli */
-        .user-panel { background: #111827; color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #3b82f6; flex-wrap: wrap; gap: 10px; }
-        .user-panel .balans { background: #f900a0; padding: 5px 15px; border-radius: 20px; font-weight: bold; }
-        .tg-btn { background: #3b82f6; color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        /* Yon Menu */
+        .sidebar { width: 250px; background-color: var(--teal); color: var(--white); display: flex; flex-direction: column; padding-top: 20px; box-shadow: 2px 0 10px rgba(0,0,0,0.1); }
+        .brand { text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 30px; letter-spacing: 1px; }
+        .sidebar-menu { list-style: none; padding: 0; margin: 0; }
+        .sidebar-menu li { padding: 12px 20px; margin: 5px 15px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500; font-size: 15px; transition: 0.3s; }
+        .sidebar-menu li i { width: 20px; text-align: center; }
+        .sidebar-menu li.active { background-color: var(--white); color: var(--teal); font-weight: bold; }
+        .sidebar-menu li:hover:not(.active) { background-color: rgba(255,255,255,0.15); }
 
-        header { background-color: var(--header-bg); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 15px; }
-        .logo { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; } .logo .white-text { color: white; } .logo .blue-text { color: #3b82f6; }
-        nav { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;} 
-        nav button { background: transparent; color: white; border: none; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: color 0.2s; padding: 5px 0; } 
-        nav button:hover, nav button.active { color: var(--top-bar); border-bottom: 2px solid var(--top-bar); }
+        /* Asosiy Qism */
+        .main-content { flex: 1; padding: 30px; overflow-y: auto; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: var(--white); padding: 15px 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); flex-wrap: wrap; gap: 15px;}
+        .user-greeting { font-size: 18px; font-weight: 600; }
+        .balance-badge { background-color: var(--teal); color: var(--white); padding: 8px 16px; border-radius: 20px; font-weight: bold; font-size: 15px; }
+        .tg-sync-btn { background-color: #0088cc; color: var(--white); border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
         
-        .hero-wrapper { padding: 20px 5%; }
-        .hero { background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://wallpapercave.com/wp/wp11135759.jpg'); background-size: cover; background-position: center; border-radius: 20px; padding: 80px 20px; text-align: center; color: white; }
-        .hero h1 { font-size: 42px; font-weight: 800; margin: 0 0 15px 0; }
-        .btn-pink { background-color: var(--accent-pink); color: white; border: none; padding: 15px 40px; font-size: 16px; font-weight: 700; border-radius: 12px; cursor: pointer; transition: 0.2s; } .btn-pink:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(249, 0, 160, 0.3); }
+        /* Navigatsiya tugmalari */
+        .nav-tabs { display: flex; gap: 15px; margin-bottom: 25px; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; overflow-x: auto;}
+        .nav-tabs button { background: transparent; border: none; font-size: 16px; font-weight: bold; color: var(--text-gray); cursor: pointer; padding: 10px 15px; transition: 0.3s; white-space: nowrap; }
+        .nav-tabs button.active { color: var(--teal); border-bottom: 3px solid var(--teal); margin-bottom: -12px; }
         
-        .container { padding: 40px 5%; max-width: 1400px; margin: 0 auto; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
-        .card { cursor: pointer; display: flex; flex-direction: column; transition: transform 0.2s; } .card:hover { transform: translateY(-5px); }
-        .card-img-area { background: var(--card-blue); height: 200px; border-radius: 16px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-        .card-img-area img { max-width: 120px; max-height: 120px; transition: 0.3s; z-index: 2; filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.4)); } 
-        .card:hover .card-img-area img { transform: scale(1.1); }
-        .badge-pink { position: absolute; top: 15px; left: 15px; background-color: var(--accent-pink); color: white; font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 20px; z-index: 3; }
-        .card-text { padding: 15px 5px; } .card-text h3 { margin: 0 0 5px 0; font-size: 18px; color: var(--text-dark); } .card-text .price { margin: 0; color: var(--text-gray); font-weight: 500; }
+        /* Kartochkalar (SMM dizaynida) */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+        .card-item { background: var(--white); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; overflow: hidden; border: 1px solid #e0e0e0; }
+        .card-item:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(56, 194, 194, 0.2); border-color: var(--teal); }
+        .card-img-area { background: #f8fafc; height: 180px; display: flex; justify-content: center; align-items: center; position: relative; }
+        .card-img-area img { max-width: 110px; max-height: 110px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); transition: 0.3s; }
+        .card-item:hover .card-img-area img { transform: scale(1.1); }
+        .badge-price { position: absolute; top: 10px; left: 10px; background: var(--teal); color: white; padding: 5px 10px; border-radius: 8px; font-weight: bold; font-size: 13px; }
+        .card-info { padding: 15px; text-align: center; border-top: 1px solid #e0e0e0; }
+        .card-info h3 { margin: 0 0 5px 0; font-size: 16px; color: var(--text-main); }
+
+        /* Forma va Modal */
+        .card-panel { background: var(--white); border-radius: 12px; padding: 25px; box-shadow: 0 4px 20px rgba(0,100,100,0.04); margin-bottom: 25px; border-top: 4px solid var(--teal); }
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; font-weight: 600; color: var(--teal-dark); margin-bottom: 8px; font-size: 14px;}
+        .form-control { width: 100%; padding: 14px; border: 1px solid #e0e0e0; background-color: #fafafa; border-radius: 8px; font-size: 15px; box-sizing: border-box; outline: none; }
+        .form-control:focus { border-color: var(--teal); background: var(--white); }
+        .btn-submit { background-color: var(--teal); color: var(--white); border: none; width: 100%; padding: 15px; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; }
+        .btn-submit:hover { background-color: #2ab0b0; }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; padding: 20px; box-sizing: border-box; backdrop-filter: blur(4px); }
+        .modal-content { background: white; padding: 30px; border-radius: 16px; width: 100%; max-width: 400px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .close-btn { position: absolute; top: 15px; right: 15px; background: #f0fbfb; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; color: var(--teal-dark); cursor: pointer; }
         
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 1000; padding: 20px; box-sizing: border-box; backdrop-filter: blur(5px); }
-        .modal-content { background: white; padding: 40px; border-radius: 24px; width: 100%; max-width: 450px; position: relative; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
-        .close-btn { position: absolute; top: 20px; right: 20px; background: #f3f4f6; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; justify-content: center; align-items: center;}
-        .input-group { margin-bottom: 20px; text-align: left; } .input-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #111827; }
-        .input-group input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #d1d5db; box-sizing: border-box; font-size: 15px;}
-        .input-group input:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); }
+        .section-view { display: none; }
+        .section-view.active { display: block; }
     </style>
 </head>
 <body>
 
-    <div class="user-panel">
-        <div>
-            Salom, <b><%= user.username %></b>!
-            <a href="/auth/logout" style="color: #9ca3af; text-decoration: none; margin-left: 15px; font-size: 14px;">[Chiqish]</a>
-        </div>
-        <div style="display: flex; gap: 15px; align-items: center;">
-            <div class="balans">Balans: <%= user.balance %> UZS</div>
-            <% if (!user.tg_id) { %>
-                <button class="tg-btn" onclick="syncTelegram()">Telegram Bog'lash</button>
-            <% } else { %>
-                <span style="color: #3b82f6;">@<%= user.tg_username %></span>
-            <% } %>
-        </div>
+    <div class="sidebar">
+        <div class="brand">AVG CLUB</div>
+        <ul class="sidebar-menu">
+            <li class="active" onclick="switchMainTab('shop', this)"><i class="fa-solid fa-store"></i> Do'kon</li>
+            <li onclick="switchMainTab('deposit', this)"><i class="fa-solid fa-wallet"></i> Hisobni To'ldirish</li>
+            <li style="margin-top: auto;" onclick="window.location.href='/auth/logout'"><i class="fa-solid fa-right-from-bracket"></i> Chiqish</li>
+        </ul>
     </div>
 
-    <header>
-        <div class="logo"><span class="blue-text">AVG</span><span class="white-text">CLUB</span></div>
-        <nav>
-            <button id="btn-fruits" class="active" onclick="changeSection('fruits')">Mevalar / Fruits</button>
-            <button id="btn-boost" onclick="changeSection('boost')">Boost & Passes</button>
-            <button id="btn-accounts" onclick="changeSection('accounts')">Akkauntlar</button>
-        </nav>
-    </header>
-
-    <div class="hero-wrapper">
-        <div class="hero">
-            <h1 id="hero-title">Tezkor Yetkazib Berish</h1>
-            <p style="color: #e5e7eb; margin-bottom: 30px;">Blox Fruits mevalari, akkauntlar va xizmatlarni xavfsiz sotib oling.</p>
-            <button class="btn-pink" onclick="document.getElementById('main-section').scrollIntoView({behavior: 'smooth'})">O'YINNI TANLASH</button>
+    <div class="main-content">
+        
+        <div class="top-bar">
+            <div class="user-greeting">Salom, <span style="color: var(--teal);"><%= user.username %></span> 👋</div>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <div class="balance-badge">Balans: <%= user.balance %> UZS</div>
+                <% if (!user.tg_id) { %>
+                    <button class="tg-sync-btn" onclick="syncTelegram()"><i class="fa-brands fa-telegram"></i> Botga ulash</button>
+                <% } else { %>
+                    <span style="color: var(--teal-dark); font-weight: bold;"><i class="fa-brands fa-telegram" style="color: #0088cc;"></i> @<%= user.tg_username %></span>
+                <% } %>
+            </div>
         </div>
-    </div>
 
-    <div class="container" id="main-section">
-        <h2 id="section-title" style="font-size: 32px; margin-bottom: 25px;">Mevalar To'plami</h2>
-        <div class="grid" id="main-grid"></div>
+        <div id="shop" class="section-view active">
+            
+            <div class="nav-tabs">
+                <button id="tab-fruits" class="active" onclick="loadCategory('fruits', this)">🍎 Mevalar (Fruits)</button>
+                <button id="tab-boost" onclick="loadCategory('boost', this)">⚡️ Boost & Passes</button>
+                <button id="tab-accounts" onclick="loadCategory('accounts', this)">🎮 Akkauntlar</button>
+            </div>
+
+            <div class="grid" id="products-grid">
+                </div>
+        </div>
+
+        <div id="deposit" class="section-view">
+            <div class="card-panel" style="text-align: center;">
+                <h2 style="color: var(--teal-dark); margin-top:0;"><i class="fa-solid fa-credit-card"></i> Balansni To'ldirish</h2>
+                <p style="font-size: 16px; line-height: 1.6; color: #4b5563;">Saytdagi hisobingizni to'ldirish uchun kerakli summani quyidagi karta raqamiga o'tkazing. To'lov qilingach, avtomatik SMS tizimi orqali balansingizga pul qo'shiladi.</p>
+                <div style="background: var(--bg-main); border: 2px dashed var(--teal); color: var(--teal-dark); padding: 25px; border-radius: 12px; font-size: 28px; font-family: monospace; font-weight: bold; letter-spacing: 3px; margin: 30px 0;">
+                    5614 6846 0556 8557
+                </div>
+                <p style="color: #dc2626; font-weight: bold; background: #fee2e2; padding: 10px; border-radius: 8px; display: inline-block;">Diqqat: To'lov izohiga hech narsa yozmang!</p>
+            </div>
+        </div>
+
     </div>
 
     <div class="modal" id="paymentModal">
-        <div class="modal-content" id="paymentForm">
-            <button class="close-btn" onclick="closeModal()">✖</button>
-            <h2 style="text-align:center; margin-bottom: 5px; font-size: 24px;">Xaridni Tasdiqlash</h2>
-            <p id="selectedItemName" style="text-align:center; color:gray; font-weight:bold; margin-bottom:20px;"></p>
-
-            <div class="input-group">
-                <label>Roblox Username (Nikingiz):</label>
-                <input type="text" id="robloxUser" placeholder="Misol: rip_indra...">
-            </div>
-
-            <p style="text-align: center; color: #dc2626; font-size: 14px; display: none; font-weight: 600;" id="error-msg"></p>
-
-            <button class="btn-pink" style="width: 100%; margin-bottom: 15px;" id="order-btn" onclick="processPayment()">Balansdan to'lash va Olish</button>
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h2 style="text-align:center; margin-top: 0; color: var(--teal-dark);">Xaridni Tasdiqlash</h2>
             
-            <div style="text-align: center; border-top: 1px solid #e5e7eb; padding-top: 15px; font-size: 14px; color: #4b5563;">
-                Balans yetarli emasmi? Kartaga to'lov qiling va Adminga yozing: <br>
-                <b style="color: #3b82f6; font-size: 18px; display: block; margin-top: 10px;">5614 6846 0556 8557</b>
+            <div style="background: var(--bg-main); padding: 15px; border-radius: 8px; text-align: center; margin-bottom: 20px; border: 1px solid #b2dfdb;">
+                <span style="display:block; font-size: 14px; color: var(--text-gray);">Xarid qilinmoqda:</span>
+                <b id="selectedItemName" style="font-size: 18px; color: var(--teal-dark);"></b>
             </div>
+
+            <div class="form-group">
+                <label class="form-label">Roblox Username (Nikingiz)</label>
+                <input type="text" class="form-control" id="robloxUser" placeholder="Misol: rip_indra...">
+            </div>
+
+            <p style="text-align: center; color: #dc2626; font-size: 14px; display: none; font-weight: bold;" id="error-msg"></p>
+
+            <button class="btn-submit" id="order-btn" onclick="processPayment()"><i class="fa-solid fa-bag-shopping"></i> Balansdan to'lash</button>
         </div>
     </div>
 
@@ -108,10 +134,10 @@
         const tg = window.Telegram.WebApp;
         tg.ready(); tg.expand();
 
-        let selectedItem = "";
-        let selectedPrice = "";
+        let currentSelectedItem = "";
+        let currentSelectedPrice = "";
 
-        // TOLIq MEVALAR BAZASI (Siz yuborgan ro'yxat)
+        // 1. TO'LIQ MEVALAR BAZASI (HECH NIMA QISQARTIRILMADI)
         const fruitsData = [
             { name: "Rocket", price: "1,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/cb/Rocket_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120039" },
             { name: "Spin", price: "1,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/88/Spin_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027120258" },
@@ -155,84 +181,77 @@
             { name: "Kitsune", price: "45,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/65/Kitsune_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241223162956" }
         ];
 
-        // BOOSTLAR VA PASSLAR BAZASI
         const boostData = [
             { name: "Raid Help", price: "5,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/30/Microchip.png/revision/latest/scale-to-width-down/110?cb=20220910123512" },
             { name: "Race V3 / V4", price: "25,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/87/Mirror_Fractal.png/revision/latest/scale-to-width-down/110?cb=20230113190823" },
             { name: "Level Max Boost", price: "40,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/15/2X_EXP_Boost.png/revision/latest/scale-to-width-down/110?cb=20210214150536" }
         ];
 
-        // AKKAUNTLAR BAZASI
         const accountData = [
             { name: "Max + Kitsune Acc", price: "150,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/65/Kitsune_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241223162956" },
             { name: "Starter Smurf Acc", price: "30,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/df/Buddha_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231027115325" }
         ];
 
-        // SAHIFA ALMASHTIRISH MANTIG'I
-        function changeSection(section) {
-            const grid = document.getElementById('main-grid');
-            const sectionTitle = document.getElementById('section-title');
+        // 2. YON MENU ALMASHTIRISH (Do'kon va To'ldirish)
+        function switchMainTab(tabId, element) {
+            document.querySelectorAll('.section-view').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.sidebar-menu li').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            element.classList.add('active');
+        }
+
+        // 3. KATEGORIYALARNI (MEVALAR, BOOST, ACC) CHIQARISH
+        function loadCategory(category, element) {
+            const grid = document.getElementById('products-grid');
+            document.querySelectorAll('.nav-tabs button').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
             grid.innerHTML = '';
             
-            // Faol tugmani belgilash
-            document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
-            document.getElementById('btn-' + section).classList.add('active');
+            let data = [];
+            if(category === 'fruits') data = fruitsData;
+            else if (category === 'boost') data = boostData;
+            else if (category === 'accounts') data = accountData;
 
-            let currentData = [];
-            
-            if(section === 'fruits') {
-                currentData = fruitsData;
-                sectionTitle.innerText = "Mevalar To'plami";
-            } else if (section === 'boost') {
-                currentData = boostData;
-                sectionTitle.innerText = "Boost & Gamepasses";
-            } else if (section === 'accounts') {
-                currentData = accountData;
-                sectionTitle.innerText = "Premium Akkauntlar";
-            }
-
-            // Kartochkalarni chiqarish (Agar rasm buzilgan bo'lsa, zaxira rasm qo'yiladi)
-            currentData.forEach(item => {
+            data.forEach(item => {
                 grid.innerHTML += `
-                    <div class="card" onclick="openModal('${item.name}', '${item.price}')">
+                    <div class="card-item" onclick="openModal('${item.name}', '${item.price}')">
                         <div class="card-img-area">
-                            <span class="badge-pink">${item.price} UZS</span>
+                            <span class="badge-price">${item.price} UZS</span>
                             <img src="${item.img}" alt="${item.name}" onerror="this.src='https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5c/Rubber_Fruit.png'">
                         </div>
-                        <div class="card-text">
-                            <h3>${item.name}</h3><p class="price">${item.price} UZS</p>
+                        <div class="card-info">
+                            <h3>${item.name}</h3>
                         </div>
                     </div>`;
             });
         }
 
-        // MODALNI OCHISH
+        // 4. MODAL FUNKSIYALARI
         function openModal(name, price) {
-            selectedItem = name; selectedPrice = price;
+            currentSelectedItem = name; 
+            currentSelectedPrice = price;
             document.getElementById('selectedItemName').innerText = `${name} - ${price} UZS`;
             document.getElementById('error-msg').style.display = 'none';
             document.getElementById('paymentModal').style.display = 'flex';
         }
 
-        // MODALNI YOPISH
         function closeModal() { document.getElementById('paymentModal').style.display = 'none'; }
 
-        // TELEGRAM BOG'LASH
+        // 5. TG ULASH VA BUYURTMA BERISH API LARI
         async function syncTelegram() {
             const user = tg.initDataUnsafe?.user;
-            if(!user) return alert("Saytni Telegram orqali oching!");
+            if(!user) return alert("Iltimos, saytni Telegram botingiz orqali oching!");
             const res = await fetch('/api/sync-telegram', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ tg_id: user.id, tg_username: user.username }) });
             if((await res.json()).success) location.reload();
         }
 
-        // BUYURTMA BERISH (BAZA VA TELEGRAMGA)
         async function processPayment() {
-            const nik = document.getElementById('robloxUser').value;
+            const nik = document.getElementById('robloxUser').value.trim();
             const errorMsg = document.getElementById('error-msg');
             const btn = document.getElementById('order-btn');
 
             if(nik.length < 3) { 
-                errorMsg.innerText = "Iltimos, Roblox nikingizni kiriting!"; 
+                errorMsg.innerText = "Iltimos, Roblox nikingizni yozing!"; 
                 errorMsg.style.display = 'block'; 
                 return; 
             }
@@ -242,27 +261,27 @@
             try {
                 const res = await fetch('/api/buyurtma', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ robloxNik: nik, meva: selectedItem, price: selectedPrice })
+                    body: JSON.stringify({ robloxNik: nik, meva: currentSelectedItem, price: currentSelectedPrice })
                 });
                 const data = await res.json();
                 
                 if(data.success) {
-                    alert(`✅ Tabriklaymiz! ${selectedItem} xarid qilindi. Admin tez orada bog'lanadi.`);
+                    alert(`✅ Xarid tasdiqlandi! Admin siz bilan tez orada bog'lanadi.`);
                     location.reload();
                 } else {
                     errorMsg.innerText = data.error;
                     errorMsg.style.display = 'block';
                 }
             } catch (err) { 
-                errorMsg.innerText = "Server xatosi yuz berdi.";
+                errorMsg.innerText = "Server xatosi.";
                 errorMsg.style.display = 'block';
             } finally {
-                btn.innerText = "Balansdan to'lash va Olish"; btn.disabled = false;
+                btn.innerText = "Balansdan to'lash"; btn.disabled = false;
             }
         }
 
-        // Sayt yuklanganda avtomatik 'Mevalar' bo'limini ochish
-        window.onload = () => changeSection('fruits');
+        // Sayt ishlaganda birinchi bo'lib Mevalar bo'limi ochiladi
+        window.onload = () => loadCategory('fruits', document.getElementById('tab-fruits'));
     </script>
 </body>
 </html>
