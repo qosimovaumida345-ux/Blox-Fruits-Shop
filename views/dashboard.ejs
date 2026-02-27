@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Blox Fruits | Premium Shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* SIZNING HTML DIZAYNINGIZ TO'LIQ SHU YERDA SAQLANDI */
+        :root { --bg-main: #ffffff; --header-bg: #000000; --top-bar: #3b82f6; --text-dark: #111827; --text-gray: #6b7280; --accent-pink: #f900a0; --card-blue: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%); }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-dark); margin: 0; padding: 0; overflow-x: hidden; }
+        
+        /* Yangi qo'shilgan: Foydalanuvchi paneli */
+        .user-panel { background: #111827; color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #3b82f6; }
+        .user-panel .balans { background: #f900a0; padding: 5px 15px; border-radius: 20px; font-weight: bold; }
+        .tg-btn { background: #3b82f6; color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+
+        header { background-color: var(--header-bg); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; } .logo .white-text { color: white; } .logo .blue-text { color: #3b82f6; }
+        nav { display: flex; gap: 25px; } nav button { background: transparent; color: white; border: none; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: color 0.2s; padding: 0; } nav button:hover, nav button.active { color: var(--top-bar); }
+        .hero-wrapper { padding: 20px 5%; }
+        .hero { background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://wallpapercave.com/wp/wp11135759.jpg'); background-size: cover; background-position: center; border-radius: 20px; padding: 80px 20px; text-align: center; color: white; }
+        .hero h1 { font-size: 42px; font-weight: 800; margin: 0 0 15px 0; }
+        .btn-pink { background-color: var(--accent-pink); color: white; border: none; padding: 15px 40px; font-size: 16px; font-weight: 700; border-radius: 12px; cursor: pointer; transition: 0.2s; } .btn-pink:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(249, 0, 160, 0.3); }
+        .container { padding: 40px 5%; max-width: 1400px; margin: 0 auto; } .collection-header h2 { font-size: 36px; font-weight: 800; margin-bottom: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
+        .card { cursor: pointer; display: flex; flex-direction: column; transition: transform 0.2s; } .card:hover { transform: translateY(-5px); }
+        .card-img-area { background: var(--card-blue); height: 240px; border-radius: 16px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .card-img-area img { max-width: 130px; max-height: 130px; transition: 0.3s; z-index: 2; } .card:hover .card-img-area img { transform: scale(1.1); }
+        .badge-pink { position: absolute; top: 15px; left: 15px; background-color: var(--accent-pink); color: white; font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 20px; z-index: 3; }
+        .card-text { padding: 15px 5px; } .card-text h3 { margin: 0 0 5px 0; font-size: 18px; color: var(--text-dark); } .card-text .price { margin: 0; color: var(--text-gray); font-weight: 500; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 1000; padding: 20px; box-sizing: border-box; }
+        .modal-content { background: white; padding: 40px; border-radius: 24px; width: 100%; max-width: 450px; position: relative; }
+        .close-btn { position: absolute; top: 20px; right: 20px; background: #f3f4f6; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer; }
+        .input-group { margin-bottom: 20px; text-align: left; } .input-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .input-group input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #d1d5db; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+
+    <div class="user-panel">
+        <div>
+            Salom, <b><%= user.username %></b>!
+            <a href="/auth/logout" style="color: #6b7280; text-decoration: none; margin-left: 15px; font-size: 14px;">[Chiqish]</a>
+        </div>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <div class="balans">Balans: <%= user.balance %> UZS</div>
+            <% if (!user.tg_id) { %>
+                <button class="tg-btn" onclick="syncTelegram()">Telegram Bog'lash</button>
+            <% } else { %>
+                <span style="color: #3b82f6;">@<%= user.tg_username %></span>
+            <% } %>
+        </div>
+    </div>
+
+    <header>
+        <div class="logo"><span class="blue-text">AVG</span><span class="white-text">CLUB</span></div>
+        <nav>
+            <button id="btn-fruits" class="active" onclick="changeSection('fruits')">Mevalar / Fruits</button>
+            <button id="btn-boost" onclick="changeSection('boost')">Boost & Passes</button>
+        </nav>
+    </header>
+
+    <div class="hero-wrapper">
+        <div class="hero">
+            <h1>Tezkor Yetkazib Berish</h1>
+            <button class="btn-pink" onclick="document.getElementById('main-section').scrollIntoView({behavior: 'smooth'})">O'YINNI TANLASH</button>
+        </div>
+    </div>
+
+    <div class="container" id="main-section">
+        <div class="grid" id="main-grid"></div>
+    </div>
+
+    <div class="modal" id="paymentModal">
+        <div class="modal-content" id="paymentForm">
+            <button class="close-btn" onclick="closeModal()">✖</button>
+            <h2 style="text-align:center; margin-bottom: 5px;">Xaridni Tasdiqlash</h2>
+            <p id="selectedItemName" style="text-align:center; color:gray; font-weight:bold; margin-bottom:20px;"></p>
+
+            <div class="input-group">
+                <label>Roblox Username (Nikingiz):</label>
+                <input type="text" id="robloxUser" placeholder="Misol: rip_indra...">
+            </div>
+
+            <p style="text-align: center; color: red; font-size: 14px; display: none;" id="error-msg"></p>
+
+            <button class="btn-pink" style="width: 100%; margin-bottom: 15px;" onclick="processPayment()">Balansdan to'lash va Olish</button>
+            
+            <div style="text-align: center; border-top: 1px solid #e5e7eb; padding-top: 15px; font-size: 14px;">
+                Balans yetarli emasmi? Kartaga to'lov qiling va Adminga yozing: <br>
+                <b style="color: #3b82f6; font-size: 16px;">5614 6846 0556 8557</b>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.ready(); tg.expand();
+
+        let selectedItem = "";
+        let selectedPrice = "";
+
+        const fruitsData = [
+            { name: "T-Rex", price: "25,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d9/T-Rex_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231226191220" },
+            { name: "Dough", price: "28,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/02/Dough_Fruit.png/revision/latest/scale-to-width-down/110?cb=20231210155057" },
+            { name: "Kitsune", price: "45,000", img: "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/65/Kitsune_Fruit.png/revision/latest/scale-to-width-down/110?cb=20241223162956" }
+            // O'zingiz qolgan mevalarni shu yerga qo'shishingiz mumkin...
+        ];
+
+        function changeSection(section) {
+            const grid = document.getElementById('main-grid');
+            grid.innerHTML = '';
+            fruitsData.forEach(item => {
+                grid.innerHTML += `
+                    <div class="card" onclick="openModal('${item.name}', '${item.price}')">
+                        <div class="card-img-area">
+                            <span class="badge-pink">${item.price} UZS</span>
+                            <img src="${item.img}" alt="${item.name}">
+                        </div>
+                        <div class="card-text">
+                            <h3>${item.name}</h3><p class="price">${item.price} UZS</p>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function openModal(name, price) {
+            selectedItem = name; selectedPrice = price;
+            document.getElementById('selectedItemName').innerText = `${name} - ${price} UZS`;
+            document.getElementById('error-msg').style.display = 'none';
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        function closeModal() { document.getElementById('paymentModal').style.display = 'none'; }
+
+        async function syncTelegram() {
+            const user = tg.initDataUnsafe?.user;
+            if(!user) return alert("Saytni Telegram orqali oching!");
+            const res = await fetch('/api/sync-telegram', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ tg_id: user.id, tg_username: user.username }) });
+            if((await res.json()).success) location.reload();
+        }
+
+        async function processPayment() {
+            const nik = document.getElementById('robloxUser').value;
+            if(nik.length < 3) { document.getElementById('error-msg').innerText = "Nikingizni kiriting!"; document.getElementById('error-msg').style.display = 'block'; return; }
+
+            try {
+                const res = await fetch('/api/buyurtma', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ robloxNik: nik, meva: selectedItem, price: selectedPrice })
+                });
+                const data = await res.json();
+                
+                if(data.success) {
+                    alert("Tabriklaymiz! Xarid muvaffaqiyatli amalga oshdi.");
+                    location.reload();
+                } else {
+                    document.getElementById('error-msg').innerText = data.error;
+                    document.getElementById('error-msg').style.display = 'block';
+                }
+            } catch (err) { alert("Server bilan ulanishda xato."); }
+        }
+
+        window.onload = () => changeSection('fruits');
+    </script>
+</body>
+</html>
