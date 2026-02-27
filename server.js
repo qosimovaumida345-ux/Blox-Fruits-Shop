@@ -10,20 +10,12 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ==========================================
-// 1. TELEGRAM BOT VA KANAL SOZLAMALARI
-// ==========================================
-// Botingizning tokeni (oldingi kodingizdan olindi)
+// TELEGRAM BOT VA KANAL SOZLAMALARI
 const BOT_TOKEN = '8689663085:AAEtRKVPpqOMgjhV1L0rdMDArSSkUpnrafU';
-// Blox Fruits uchun maxsus kanal/gruppa ID si
 const ADMIN_GROUP_ID = '-1003830831325'; 
-
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
-// ==========================================
-// 2. SUPABASE BAZASIGA ULANISH
-// ==========================================
-// Paroldagi "/" belgisi xavfsizlik uchun "%2F" ga almashtirildi
+// SUPABASE BAZASIGA ULANISH
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL || 'postgresql://postgres.pkgewbdmisovwpccneho:abdulloh2011%2F@aws-1-ap-northeast-2.pooler.supabase.com:6543/postgres',
     ssl: { rejectUnauthorized: false }
@@ -41,18 +33,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// ==========================================
-// 3. SESSIYA SOZLAMALARI
-// ==========================================
+// SESSIYA SOZLAMALARI
 app.use(session({
     store: new pgSession({ pool: pool, tableName: 'session' }),
     secret: 'blox_fruits_premium_secret',
     resave: false, saveUninitialized: false, cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }
 }));
 
-// ==========================================
-// 4. SAHIFALAR VA AVTORIZATSIYA
-// ==========================================
+// SAHIFALAR VA AVTORIZATSIYA
 app.get('/', (req, res) => {
     if (req.session.userId) return res.redirect('/shop');
     res.render('login');
@@ -88,9 +76,7 @@ app.post('/auth/login', async (req, res) => {
 
 app.get('/auth/logout', (req, res) => { req.session.destroy(); res.redirect('/'); });
 
-// ==========================================
-// 5. TELEGRAM ULASH VA BUYURTMA BERISH
-// ==========================================
+// TELEGRAM ULASH VA BUYURTMA BERISH
 app.post('/api/sync-telegram', async (req, res) => {
     if (!req.session.userId) return res.status(403).json({ error: "Login qiling" });
     const { tg_id, tg_username } = req.body;
@@ -103,7 +89,7 @@ app.post('/api/sync-telegram', async (req, res) => {
 app.post('/api/buyurtma', async (req, res) => {
     if (!req.session.userId) return res.status(403).json({ error: "Avval tizimga kiring" });
     const { robloxNik, meva, price } = req.body;
-    const itemPrice = parseInt(price.replace(/,/g, '')); // "25,000" ni 25000 ga aylantiradi
+    const itemPrice = parseInt(price.replace(/,/g, '')); // Vergullarni tozalaymiz (Masalan: 1,000 -> 1000)
 
     try {
         const userRes = await pool.query("SELECT * FROM blox_users WHERE id = $1", [req.session.userId]);
@@ -124,9 +110,8 @@ app.post('/api/buyurtma', async (req, res) => {
 
         const orderId = newOrder.rows[0].id;
 
-        // Adminga (Kanalga) xabar yuborish
+        // Adminga xabar
         const text = `🚨 <b>YANGI XARID #${orderId} (BLOX FRUITS)</b>\n\n👤 Saytdagi mijoz: @${user.tg_username || user.username}\n🎮 Roblox Nik: <b>${robloxNik}</b>\n🛍 Mahsulot: ${meva}\n💰 Narxi: ${itemPrice} UZS\n\n✅ <i>To'lov sayt ichidagi balansdan yechib olindi!</i>`;
-        
         bot.sendMessage(ADMIN_GROUP_ID, text, { parse_mode: 'HTML' });
 
         res.json({ success: true, orderId });
@@ -136,9 +121,7 @@ app.post('/api/buyurtma', async (req, res) => {
     }
 });
 
-// ==========================================
-// 6. MACRODROID (SMS ORQALI TO'LOV)
-// ==========================================
+// MACRODROID (SMS ORQALI TO'LOV)
 const ishonchliRaqamlar = ['8888', 'click', 'payme', 'uzum', 'paynet', 'nbu', 'cardinfo', 'uzcard', 'humo', 'sms-inform'];
 
 app.post('/api/tolov', (req, res) => {
@@ -150,8 +133,6 @@ app.post('/api/tolov', (req, res) => {
         const summaUshlagich = smsMatn.match(/(\d[\d\s]*)(so'm|uzs|sum)/i);
         if (summaUshlagich) {
             const tushganPul = summaUshlagich[1].replace(/\s/g, ''); 
-            
-            // Kanalga SMS tushgani haqida xabar
             let text = `💳 <b>KARTAGA PUL TUSHDI (SMS)</b>\n💰 <b>Summa:</b> ${tushganPul} so'm\n\n<i>Mijozga balans qo'shish uchun Supabase'ga kirib 'blox_users' jadvalidan balansini oshiring.</i>`;
             bot.sendMessage(ADMIN_GROUP_ID, text, { parse_mode: 'HTML' });
         }
