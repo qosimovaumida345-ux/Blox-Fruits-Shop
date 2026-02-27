@@ -3,32 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blox Fruits - Tizimga kirish</title>
+    <title>AVG CLUB - Tizimga kirish</title>
     <style>
-        body { background: #000000; color: white; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .card { background: #111827; padding: 40px; border-radius: 20px; width: 100%; max-width: 380px; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2); border-top: 4px solid #f900a0; }
-        .logo { text-align: center; font-size: 28px; font-weight: 800; margin-bottom: 30px; }
-        .logo .blue { color: #3b82f6; } .logo .white { color: white; }
-        .form-control { width: 100%; padding: 14px; background: #1f2937; border: 1px solid #374151; border-radius: 8px; color: white; margin-bottom: 20px; box-sizing: border-box; outline: none; }
-        .form-control:focus { border-color: #3b82f6; }
-        .btn-pink { background: #f900a0; color: white; border: none; width: 100%; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; font-size: 16px;}
-        .btn-pink:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(249,0,160,0.4); }
-        .toggle-link { display: block; text-align: center; margin-top: 20px; color: #3b82f6; cursor: pointer; text-decoration: none; }
-        .toggle-link:hover { text-decoration: underline; }
+        :root { --teal: #38c2c2; --bg-main: #f0fbfb; --text-main: #1b4d4d; --white: #ffffff; }
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg-main); color: var(--text-main); display: flex; align-items: center; justify-content: center; height: 100vh; }
+        .login-card { background: var(--white); padding: 40px; border-radius: 16px; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(56, 194, 194, 0.1); border-top: 5px solid var(--teal); }
+        .brand { text-align: center; font-size: 28px; font-weight: bold; margin-bottom: 30px; color: var(--teal); }
+        .form-group { margin-bottom: 20px; }
+        .form-control { width: 100%; padding: 14px; border: 1px solid #e0e0e0; background-color: #fafafa; border-radius: 8px; font-size: 15px; box-sizing: border-box; outline: none; }
+        .form-control:focus { border-color: var(--teal); background: var(--white); }
+        .btn-submit { background-color: var(--teal); color: var(--white); border: none; width: 100%; padding: 15px; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; }
+        .btn-submit:hover { background-color: #2ab0b0; }
+        .toggle-link { display: block; text-align: center; margin-top: 20px; color: var(--teal); cursor: pointer; font-weight: 600; }
         #alert-box { background: #fee2e2; color: #dc2626; padding: 10px; border-radius: 8px; text-align: center; display: none; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <div class="logo"><span class="blue">AVG</span><span class="white">CLUB</span></div>
-    <h3 id="form-title" style="text-align: center; margin-bottom: 20px;">Tizimga Kirish</h3>
+<div class="login-card">
+    <div class="brand">AVG CLUB SHOP</div>
+    <h3 id="form-title" style="text-align: center; margin-top: 0; margin-bottom: 25px;">Tizimga Kirish</h3>
     
     <div id="alert-box"></div>
-    <input type="text" id="username" class="form-control" placeholder="Foydalanuvchi nomi">
-    <input type="password" id="password" class="form-control" placeholder="Parol">
     
-    <button class="btn-pink" id="submit-btn" onclick="submitForm()">Kirish</button>
+    <div class="form-group">
+        <input type="text" id="username" class="form-control" placeholder="Foydalanuvchi nomi (Login)">
+    </div>
+    <div class="form-group">
+        <input type="password" id="password" class="form-control" placeholder="Parol">
+    </div>
+    
+    <button class="btn-submit" id="submit-btn" onclick="submitForm()">Kirish</button>
     <span class="toggle-link" onclick="toggleMode()" id="toggle-text">Hisobingiz yo'qmi? Ro'yxatdan o'ting</span>
 </div>
 
