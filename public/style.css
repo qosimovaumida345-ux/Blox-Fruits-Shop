@@ -1,0 +1,138 @@
+/* =======================================================
+           MOBIL QURILMALAR UCHUN MOSLASHUV (RESPONSIVE) CSS
+           ======================================================= */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            /* Yon menyuni pastki menyuga (Bottom Nav) aylantiramiz */
+            .sidebar {
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                padding: 10px 0;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                z-index: 1000;
+                box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.05);
+                justify-content: space-around;
+            }
+
+            .brand {
+                display: none; /* Telefonda logotip tepada turadi, pastda joy olmasligi uchun yashiramiz */
+            }
+
+            .sidebar-menu {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                justify-content: space-around;
+                align-items: center;
+            }
+
+            .sidebar-menu li {
+                margin: 0;
+                padding: 8px 10px;
+                flex-direction: column;
+                gap: 5px;
+                font-size: 12px;
+                border-radius: 12px;
+                background: transparent;
+            }
+
+            .sidebar-menu li i {
+                font-size: 20px;
+            }
+
+            .sidebar-menu li.active {
+                background-color: transparent;
+                color: var(--white);
+            }
+
+            .sidebar-menu li:hover:not(.active) {
+                background-color: transparent;
+            }
+
+            .sidebar-menu li:last-child {
+                margin-top: 0 !important;
+            }
+
+            /* Asosiy qismni to'g'rilash (pastki menyu yopib qoymasligi uchun pastdan joy qoldiramiz) */
+            .main-content {
+                padding: 15px;
+                padding-bottom: 90px;
+            }
+
+            /* Tepasi (Balans va TG ulash qismi) */
+            .top-bar {
+                padding: 15px;
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .user-greeting {
+                font-size: 16px;
+            }
+
+            .balance-badge {
+                font-size: 14px;
+            }
+
+            .tg-sync-btn {
+                width: 100%;
+            }
+
+            /* Kategoriyalar (Mevalar, Boostlar) navigatsiyasi */
+            .nav-tabs {
+                gap: 5px;
+                justify-content: space-between;
+            }
+
+            .nav-tabs button {
+                font-size: 13px;
+                padding: 8px 10px;
+            }
+
+            /* Kartochkalar (Telefonda 2 ta yonma-yon turadigan qilish) */
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .card-img-area {
+                height: 120px;
+            }
+
+            .card-img-area img {
+                max-width: 75px;
+                max-height: 75px;
+            }
+
+            .card-info {
+                padding: 10px;
+            }
+
+            .card-info h3 {
+                font-size: 13px;
+            }
+
+            .badge-price {
+                font-size: 11px;
+                padding: 4px 6px;
+                top: 8px;
+                left: 8px;
+            }
+
+            /* To'lov (Modal) oynasi kichik ekranlarga moslashuvi */
+            .modal-content {
+                padding: 20px;
+                width: 90%;
+            }
+
+            .modal-content h2 {
+                font-size: 20px;
+            }
+        }
